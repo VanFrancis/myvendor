@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">MyVendor</string>
+    <string name="title_activity_dashboard">MainActivity</string>
+
+    //Login
+    <string name="content_description">image</string>
+    <string name="title_login">LOGIN</string>
+    <string name="et_hint_email_id">E-mail</string>
+    <string name="et_hint_password">Senha</string>
+    <string name="lbl_forgot_password">Esqueceu a senha?</string>
+    <string name="btn_lbl_login">Acessar</string>
+    <string name="don_t_have_an_account">Você não possui uma conta?</string>
+    <string name="register"><u>Cadastrar</u></string>
+
+    //Register
+    <string name="create_an_account">CRIAR UMA CONTA</string>
+    <string name="hint_last_name">Sobrenome</string>
+    <string name="hint_first_name">Nome</string>
+    <string name="et_hint_confirm_password">Confirme a senha</string>
+    <string name="i_agree_to_the_terms_and_condition">Eu aceito os <u>Termos e Condições</u></string>
+    <string name="btn_lbl_register">Cadastrar</string>
+    <string name="already_have_an_account">Já possui uma conta?</string>
+    <string name="login"><u>Login</u></string>
+
+    //Message
+    <string name="err_msg_enter_first_name">Por Favor, preencha o nome.</string>
+    <string name="err_msg_enter_last_name">Por Favor, preencha o sobrenome.</string>
+    <string name="err_msg_enter_email">Por Favor, preencha o e-mail.</string>
+    <string name="err_msg_enter_password">Por Favor, preencha a senha.</string>
+    <string name="err_msg_enter_confirm_password">Por Favor, preencha a confirmação da senha.</string>
+    <string name="err_msg_password_and_confirm_password_mismatch">A senha e confirmação da senha não são iguais.</string>
+    <string name="err_msg_agree_terms_and_condition">Por Favor, aceite os termos de uso</string>
+    <string name="registerSuccess">Obrigado por se registrar!</string>
+
+    //Forgot password
+    <string name="forgot_password_screen">ESQUECEU A SENHA?</string>
+    <string name="forgot_password_msg">Coloque o seu endereço de e-mail e nós enviaremos um e-mail para restaurar a sua senha.</string>
+    <string name="btn_forgot_password">Restaurar a Senha</string>
+    <string name="success_send_email">Sua solicitação foi enviada, verifique seu e-mail</string>
+    <string name="register_success">Você foi Cadastrado com sucesso</string>
+
+    //Profile Details
+    <string name="title_complete_profile">COMPLETE O PERFIL</string>
+    <string name="et_hint_mobile_number">Celular</string>
+    <string name="rb_lbl_male">MASCULINO</string>
+    <string name="rb_lbl_female">FEMININO</string>
+    <string name="btn_lbl_save">Salvar</string>
+    <string name="read_storage_permission_denied">Ok, você não permitiu acesso aos seus arquivos. Você pode também pode permitir através das configurações </string>
+    <string name="image_selection_failed">Imagem selecionada falhou</string>
+    <string name="err_msg_enter_mobile_number">Por favor, preencha o número de telefone</string>
+    <string name="mgs_profile_update_success">Perfil atualizado com sucesso!</string>
+
+    <string name="msg_upload_success_image">Sua Imagem foi atualizada com sucesso</string>
+
+    //Menu
+    <string name="title_dashboard">Painel</string>
+    <string name="title_products">Produtos</string>
+    <string name="title_orders">Pedidos</string>
+
+    <string name="please_click_back_again_to_exit">Por Favor, clique novamente para sair</string>
+
+    //Settings
+    <string name="action_settings">Configuração</string>
+    <string name="title_settings">Configuração</string>
+    <string name="lbl_edit">Editar</string>
+    <string name="lbl_addresses">Endereço</string>
+    <string name="btn_lbl_logout">Sair</string>
+    <string name="title_edit_profile">Editar Perfil</string>
+    <string name="action_add_product">Novo Produto</string>
+
+    //Products
+    <string name="title_add_product">Novo Produto</string>
+    <string name="et_hint_product_title">Título</string>
+    <string name="et_hint_product_price">Valor (R$)</string>
+    <string name="et_hint_product_description">Descrição</string>
+    <string name="et_hint_product_quantity">Quantidade</string>
+
+    <string name="err_msg_select_product_image">Por favor, insira a imagem do produto.</string>
+    <string name="err_msg_enter_product_title">Por favor, preencha o título.</string>
+    <string name="err_msg_enter_product_price">Por favor, preencha o valor.</string>
+    <string name="err_msg_enter_product_description">Por favor, preencha a descrição.</string>
+    <string name="err_msg_enter_product_quantity">Por favor, preencha a quantidade.</string>
+
+    <string name="product_uploaded_success_message">Seu produto foi atulizado com sucesso</string>
+    <string name="no_products_added_yet">Nenhum produto foi adicionado!</string>
+    <string name="no_dashboard_item_found">Item não encontrado!</string>
+
+
+</resources>

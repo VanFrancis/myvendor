@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mobilepoc.myvendor">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyVendor">
+        <activity android:name=".view.activities.RegisterActivity"
+                  android:theme="@style/Theme.MyVendor.NoActionBar">
+        </activity>
+        <activity android:name=".view.activities.ForgotPasswordActivity"
+                  android:theme="@style/Theme.MyVendor.NoActionBar"/>
+        <activity
+            android:name=".view.activities.LoginActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar" />
+        <activity
+            android:name=".view.activities.AddProductActivity"
+            android:label="Novo Produto"
+            android:theme="@style/Theme.MyVendor.NoActionBar" />
+        <activity
+            android:name=".view.activities.DashboardActivity"
+            android:label="@string/title_activity_dashboard" />
+        <activity
+            android:name=".view.activities.SplashActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activities.MainActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>
