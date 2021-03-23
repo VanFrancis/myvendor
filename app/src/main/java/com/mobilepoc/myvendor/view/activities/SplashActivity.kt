@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
 
         splashAnimation.setAnimationListener(object:Animation.AnimationListener{
             override fun onAnimationStart(animation: Animation?) {
-                //
+                //obrigatório
             }
             override fun onAnimationEnd(animation: Animation?) {
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -43,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
                 },1000)
             }
             override fun onAnimationRepeat(animation: Animation?) {
-                //
+                //obrigatório
             }
         })
     }

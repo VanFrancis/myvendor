@@ -47,6 +47,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/hint_first_name"
+                android:inputType="text"
                 android:textColorHint="@color/astronaut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +72,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/hint_last_name"
+                android:inputType="text"
                 android:textColorHint="@color/astronaut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +97,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_email_id"
+                android:inputType="textEmailAddress"
                 android:textColorHint="@color/astronaut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,6 +122,8 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_password"
+                app:endIconMode="password_toggle"
+                android:inputType="textPassword"
                 android:textColorHint="@color/astronaut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +147,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
+                app:endIconMode="password_toggle"
+                android:inputType="textPassword"
                 android:hint="@string/et_hint_confirm_password"
                 android:textColorHint="@color/astronaut"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,8 +176,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_confirm_password">
 
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/cb_terms_and_condition"
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sm_terms_and_condition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:checked="false" />

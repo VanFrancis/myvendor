@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyVendor">
-        <activity android:name=".view.activities.RegisterActivity"
-                  android:theme="@style/Theme.MyVendor.NoActionBar">
-        </activity>
-        <activity android:name=".view.activities.ForgotPasswordActivity"
-                  android:theme="@style/Theme.MyVendor.NoActionBar"/>
+        <activity android:name=".view.activities.UserProfileActivity"></activity>
+        <activity android:name=".view.activities.SettingsActivity" />
+        <activity
+            android:name=".view.activities.RegisterActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar" />
+        <activity
+            android:name=".view.activities.ForgotPasswordActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar" />
         <activity
             android:name=".view.activities.LoginActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar" />
