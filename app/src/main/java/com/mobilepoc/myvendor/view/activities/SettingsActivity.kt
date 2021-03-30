@@ -28,6 +28,11 @@ class SettingsActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnLogout.setOnClickListener(this)
 
     }
+    override fun onResume() {
+        super.onResume()
+
+        getUserDetails()
+    }
     /**
     * Função da classe Firestore para obter os detalhes do usuário do firestore que já foi criado.
      */
@@ -44,8 +49,6 @@ class SettingsActivity : AppCompatActivity(), View.OnClickListener {
         tv_gender.text = user.gender
         tv_email.text = user.email
         tv_mobile_number.text = "${user.mobile}"
-
-
     }
 
     private fun setupActionBar() {

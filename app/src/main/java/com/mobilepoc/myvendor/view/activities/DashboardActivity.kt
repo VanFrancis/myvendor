@@ -15,7 +15,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-        val navView: BottomNavigationView? = findViewById(R.id.nav_view)
+
 
         supportActionBar!!.setBackgroundDrawable(
             ContextCompat.getDrawable(
@@ -23,8 +23,7 @@ class DashboardActivity : AppCompatActivity() {
                 R.drawable.app_gradiente
             )
         )
-
-        //ID Menu
+        val navView: BottomNavigationView? = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(

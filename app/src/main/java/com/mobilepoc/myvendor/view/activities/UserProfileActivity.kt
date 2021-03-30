@@ -139,7 +139,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
             userHashMap[Constants.FIRST_NAME] = firstName
         }
 
-        val lastName = et_first_name.text.toString().trim(){ it <= ' '}
+        val lastName = et_last_name.text.toString().trim(){ it <= ' '}
         if (lastName != mUserDetails.lastName){
             userHashMap[Constants.LAST_NAME] = lastName
         }
@@ -176,11 +176,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
      * função para notificar o resultado do sucesso e prosseguir de acordo com a atualização dos detalhes do usuário.
      */
     fun userProfileUpdateSuccess(){
-        Toast.makeText(
-            this@UserProfileActivity,
-            resources.getString(R.string.mgs_profile_update_success),
-            Toast.LENGTH_LONG
-        ).show()
+        Util.exibirToast(baseContext,resources.getString(R.string.mgs_profile_update_success))
 
         startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
         finish()
@@ -195,12 +191,8 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
                 Constants.showImageChooser(this)
 
             } else {
-                //Exibindo outro brinde se a permissão não for concedida
-                Toast.makeText(
-                    this,
-                    resources.getString(R.string.read_storage_permission_denied),
-                    Toast.LENGTH_LONG
-                ).show()
+                //Exibindo outra msg se a permissão não for concedida
+                Util.exibirToast(baseContext,resources.getString(R.string.read_storage_permission_denied))
             }
         }
     }
@@ -217,11 +209,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
                         GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!,iv_user_photo)
                     } catch (e: IOException) {
                         e.printStackTrace()
-                        Toast.makeText(
-                            this@UserProfileActivity,
-                            resources.getString(R.string.image_selection_failed),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Util.exibirToast(baseContext,resources.getString(R.string.image_selection_failed))
                     }
                 }
             }

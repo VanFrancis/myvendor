@@ -38,7 +38,6 @@ class FireStoreClass {
                 activity.userRegistrationSuccess()
             }
             .addOnFailureListener { e ->
-
                 Log.e(
                     activity.javaClass.simpleName,
                     "Falha ao tentar registrar um usuário.",
