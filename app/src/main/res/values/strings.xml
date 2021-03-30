@@ -13,7 +13,7 @@
     <string name="register"><u>Cadastrar</u></string>
 
     //Register
-    <string name="create_an_account">CRIAR UMA CONTA</string>
+    <string name="create_an_account">Criando uma Conta</string>
     <string name="hint_last_name">Sobrenome</string>
     <string name="hint_first_name">Nome</string>
     <string name="et_hint_confirm_password">Confirme a senha</string>
@@ -33,14 +33,14 @@
     <string name="registerSuccess">Obrigado por se registrar!</string>
 
     //Forgot password
-    <string name="forgot_password_screen">ESQUECEU A SENHA?</string>
+    <string name="forgot_password_screen">Esqueceu a senha?</string>
     <string name="forgot_password_msg">Coloque o seu endereço de e-mail e nós enviaremos um e-mail para restaurar a sua senha.</string>
     <string name="btn_forgot_password">Restaurar a Senha</string>
     <string name="success_send_email">Sua solicitação foi enviada, verifique seu e-mail</string>
     <string name="register_success">Você foi Cadastrado com sucesso</string>
 
     //Profile Details
-    <string name="title_complete_profile">COMPLETE O PERFIL</string>
+    <string name="title_complete_profile">Perfil Incompleto</string>
     <string name="et_hint_mobile_number">Celular</string>
     <string name="rb_lbl_male">MASCULINO</string>
     <string name="rb_lbl_female">FEMININO</string>
@@ -84,6 +84,7 @@
     <string name="product_uploaded_success_message">Seu produto foi atulizado com sucesso</string>
     <string name="no_products_added_yet">Nenhum produto foi adicionado!</string>
     <string name="no_dashboard_item_found">Item não encontrado!</string>
+    <string name="loading">Carregando...</string>
 
 
 </resources>
