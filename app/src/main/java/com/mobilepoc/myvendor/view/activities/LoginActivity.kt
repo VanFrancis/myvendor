@@ -34,6 +34,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         auth = Firebase.auth
 
+        //Carregar app com o ultimo logado
+        val usuario = auth.currentUser
+        if (usuario != null){
+            finish()
+            startActivity(Intent(this, DashboardActivity::class.java))
+        }
+
     }
 
     /**
