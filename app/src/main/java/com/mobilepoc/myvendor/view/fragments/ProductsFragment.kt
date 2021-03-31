@@ -28,10 +28,6 @@ class ProductsFragment : Fragment() {
         productsViewModel =
                 ViewModelProvider(this).get(ProductsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_products, container, false)
-        val textView: TextView = root.findViewById(R.id.text_products)
-        productsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 

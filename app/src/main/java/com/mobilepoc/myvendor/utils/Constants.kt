@@ -7,7 +7,9 @@ import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 
 object Constants {
-    const val USERS: String = "users"
+    const val USERS: String = "users" //nome da coleção - Firestore
+    const val PRODUCTS: String = "products"
+
     const val MYVENDOR_PREFERENCES: String = "MyVendor"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
     const val EXTRA_USER_DETAILS: String = "extra_user_details"
@@ -22,6 +24,10 @@ object Constants {
     const val GENDER: String = "gender"
     const val IMAGE: String = "image"
     const val COMPLETE_PROFILE: String = "profileCompleted"
+
+    const val PRODUCT_IMAGE: String = "Product_Image"
+
+
 
     const val USER_PROFILE_IMAGE:String = "User_Profile_Image"
 

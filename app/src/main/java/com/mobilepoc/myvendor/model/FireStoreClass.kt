@@ -5,16 +5,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import com.bumptech.glide.load.ImageHeaderParser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.mobilepoc.myvendor.utils.Constants
-import com.mobilepoc.myvendor.view.activities.LoginActivity
-import com.mobilepoc.myvendor.view.activities.RegisterActivity
-import com.mobilepoc.myvendor.view.activities.SettingsActivity
-import com.mobilepoc.myvendor.view.activities.UserProfileActivity
+import com.mobilepoc.myvendor.view.activities.*
 
 class FireStoreClass {
 
@@ -139,11 +137,11 @@ class FireStoreClass {
     /**
      * Uma função para fazer upload da imagem para o cloud storage.
      */
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
         //obtendo a referência de armazenamento
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
+                imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension(activity, imageFileURI)
         )
 
@@ -166,6 +164,9 @@ class FireStoreClass {
                             is UserProfileActivity -> {
                                 activity.imageUploadSuccess(uri.toString())
                             }
+                            is AddProductActivity -> {
+                                activity.imageUploadSuccess(uri.toString())
+                            }
                         }
 
                     }
@@ -177,6 +178,27 @@ class FireStoreClass {
                     exception
                 )
             }
+    }
+
+    /**
+     * Função para fazer uma entrada do produto do usuário - Firestore.
+     */
+    fun uploadProductDetails(activity: AddProductActivity, productInfo: Product) {
+        //Rotina parecida com a do Usuário, cria a coleção e configura os campos e dps envia
+        mFireStore.collection(Constants.PRODUCTS)
+                .document()
+                .set(productInfo, SetOptions.merge())
+                .addOnSuccessListener {
+
+                    activity.productUploadSuccess()
+                }
+                .addOnFailureListener { e ->
+                    Log.e(
+                            activity.javaClass.simpleName,
+                            "Erro ao enviar os detalhes do produto",
+                            e
+                    )
+                }
     }
 
 }

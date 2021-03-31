@@ -118,7 +118,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.btn_submit -> {
                     if (validateUserProfileDetails()) {
                         if (mSelectedImageFileUri != null)
-                            FireStoreClass().uploadImageToCloudStorage(this@UserProfileActivity, mSelectedImageFileUri)
+                            FireStoreClass().uploadImageToCloudStorage(this@UserProfileActivity, mSelectedImageFileUri, Constants.USER_PROFILE_IMAGE)
 
                         else {
                             updateUserProfileDetails()

@@ -85,6 +85,8 @@
     <string name="no_products_added_yet">Nenhum produto foi adicionado!</string>
     <string name="no_dashboard_item_found">Item não encontrado!</string>
     <string name="loading">Carregando...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
