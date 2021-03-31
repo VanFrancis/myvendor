@@ -9,14 +9,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/Theme.MyVendor">
-        <activity android:name=".view.activities.UserProfileActivity"
+        <activity android:name=".view.activities.ProductDetailsActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
         </activity>
-        <activity android:name=".view.activities.SettingsActivity"
-            android:theme="@style/Theme.MyVendor.NoActionBar"/>
+        <activity
+            android:name=".view.activities.UserProfileActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.activities.SettingsActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar" />
         <activity
             android:name=".view.activities.RegisterActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar" />

@@ -74,6 +74,11 @@
     <string name="et_hint_product_price">Valor (R$)</string>
     <string name="et_hint_product_description">Descrição</string>
     <string name="et_hint_product_quantity">Quantidade</string>
+    <string name="product_delete_success_message">Seu produto foi excluído com sucesso.</string>
+    <string name="delete_dialog_title">Excluir</string>
+    <string name="delete_dialog_message">Você tem certeza que deseja EXCLUIR esse produto??</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 
     <string name="err_msg_select_product_image">Por favor, insira a imagem do produto.</string>
     <string name="err_msg_enter_product_title">Por favor, preencha o título.</string>
@@ -85,7 +90,7 @@
     <string name="no_products_added_yet">Nenhum produto foi adicionado!</string>
     <string name="no_dashboard_item_found">Item não encontrado!</string>
     <string name="loading">Carregando...</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 

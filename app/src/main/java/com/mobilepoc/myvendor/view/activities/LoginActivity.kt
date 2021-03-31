@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binding = ActivityLoginBinding.inflate(layoutInflater)
+        val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener(this)
