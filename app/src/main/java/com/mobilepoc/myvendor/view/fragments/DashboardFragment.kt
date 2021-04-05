@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.model.FireStoreClass
 import com.mobilepoc.myvendor.model.Product
+import com.mobilepoc.myvendor.utils.Constants
+import com.mobilepoc.myvendor.view.activities.ProductDetailsActivity
 import com.mobilepoc.myvendor.view.activities.SettingsActivity
 import com.mobilepoc.myvendor.view.adapters.DashboardItemsListAdapter
 import com.mobilepoc.myvendor.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import java.text.FieldPosition
 
 class DashboardFragment : Fragment() {
 
@@ -87,6 +90,16 @@ class DashboardFragment : Fragment() {
 
             val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             rv_dashboard_items.adapter = adapter
+
+           /* adapter.setOnClickListener(object: DashboardItemsListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Product) {
+                    val intent = Intent(context, ProductDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
+                    startActivity(intent)
+                }
+            })*/
+
         } else {
             rv_dashboard_items.visibility = View.GONE
             tv_no_dashboard_items_found.visibility = View.VISIBLE

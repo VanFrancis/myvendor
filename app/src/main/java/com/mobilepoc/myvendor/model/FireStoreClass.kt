@@ -4,11 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.load.ImageHeaderParser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -18,9 +19,19 @@ import com.mobilepoc.myvendor.view.fragments.DashboardFragment
 import com.mobilepoc.myvendor.view.fragments.ProductsFragment
 
 class FireStoreClass {
-
     // Acessar a instância na nuvem - Firestore .
-    private val mFireStore = FirebaseFirestore.getInstance()
+    val mFireStore = FirebaseFirestore.getInstance()
+
+    fun onCreate(savedInstanceState: Bundle?) {
+        //aumentar o tamanho de armazenamento offiline
+        val settings = FirebaseFirestoreSettings.Builder()
+            .setCacheSizeBytes(
+                200 * 1024 * 1024 // 200 MB
+            )
+            .build()
+        mFireStore?.firestoreSettings = settings
+
+    }
 
     /**
      * Função que registra uma usuário na base de dados FireStore .
@@ -39,6 +50,7 @@ class FireStoreClass {
                 activity.userRegistrationSuccess()
             }
             .addOnFailureListener { e ->
+                //TODO ESCONDER O BARRA PROGRESSO
                 Log.e(
                     activity.javaClass.simpleName,
                     "Falha ao tentar registrar um usuário.",
@@ -89,7 +101,7 @@ class FireStoreClass {
 
                 when (activity) {
                     is LoginActivity -> {
-                       //Transfere os dados para uma activity
+                        //Transfere os dados para uma activity
                         activity.userLoggedInSuccess(user)
                     }
                     is SettingsActivity -> {
@@ -98,6 +110,14 @@ class FireStoreClass {
                 }
             }
             .addOnFailureListener { e ->
+                when (activity) {
+                    is LoginActivity -> {
+                        //TODO ESCONDER O BARRA PROGRESSO
+                    }
+                    is SettingsActivity -> {
+                        //TODO ESCONDER O BARRA PROGRESSO
+                    }
+                }
                 Log.e(
                     activity.javaClass.simpleName,
                     "Falha ao tentar carregar os detalhes do perfil.",
@@ -129,6 +149,12 @@ class FireStoreClass {
                 }
             }
             .addOnFailureListener { e ->
+
+                when (activity) {
+                    is UserProfileActivity -> {
+                        //TODO ESCONDER O BARRA PROGRESSO
+                    }
+                }
                 Log.e(
                     activity.javaClass.simpleName,
                     "Erro enquanto atualiza os detalhes do usuário",
@@ -144,7 +170,7 @@ class FireStoreClass {
 
         //obtendo a referência de armazenamento
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-                imageType + System.currentTimeMillis() + "."
+            imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension(activity, imageFileURI)
         )
 
@@ -175,6 +201,15 @@ class FireStoreClass {
                     }
             }
             .addOnFailureListener { exception ->
+                when (activity) {
+                    is UserProfileActivity -> {
+                        //TODO ESCONDER O BARRA PROGRESSO
+                    }
+
+                    is AddProductActivity -> {
+                        //TODO ESCONDER O BARRA PROGRESSO
+                    }
+                }
                 Log.e(
                     activity.javaClass.simpleName,
                     exception.message,
@@ -196,33 +231,33 @@ class FireStoreClass {
                     activity.productUploadSuccess()
                 }
                 .addOnFailureListener { e ->
+                    //TODO ESCONDER O BARRA PROGRESSO
                     Log.e(
-                            activity.javaClass.simpleName,
-                            "Erro ao enviar os detalhes do produto",
-                            e
+                        activity.javaClass.simpleName,
+                        "Erro ao enviar os detalhes do produto",
+                        e
                     )
                 }
     }
 
     /**
-     * A function to get the products list from cloud firestore.
+     * Uma função para obter a lista de produtos do Firestore.
      *
-     * @param fragment The fragment is passed as parameter as the function is called from fragment and need to the success result.
+     * @param fragment O fragmento é passado como parâmetro conforme a função é chamada a partir do fragmento e precisa para o resultado de sucesso.
      */
     fun getProductsList(fragment: Fragment) {
-        // The collection name for PRODUCTS
         mFireStore.collection(Constants.PRODUCTS)
                 .whereEqualTo(Constants.USER_ID, getUserIDAtual())
-                .get() // Will get the documents snapshots.
+                .get() // Obterá os snapshots dos documentos.
                 .addOnSuccessListener { document ->
 
-                    // Here we get the list of boards in the form of documents.
+                    // Log com a lista de produtos
                     Log.e("Products List", document.documents.toString())
 
-                    // Here we have created a new instance for Products ArrayList.
+                    // Cria um arraylist.
                     val productsList: ArrayList<Product> = ArrayList()
 
-                    // A for loop as per the list of documents to convert them into Products ArrayList.
+                    // Um loop  que percorre a lista de documentos convertendo produtos em um ArrayList  .
                     for (i in document.documents) {
 
                         val product = i.toObject(Product::class.java)
@@ -237,31 +272,29 @@ class FireStoreClass {
                     }
                 }
                 .addOnFailureListener { e ->
-                    // Hide the progress dialog if there is any error based on the base class instance.
                     when (fragment) {
                         is ProductsFragment -> {
-                           // fragment.hideProgressDialog()
+                            //TODO ESCONDER O BARRA PROGRESSO
                         }
                     }
-                    Log.e("Get Product List", "Error while getting product list.", e)
+                    Log.e("Get Product List", "Erro ao obter lista de produtos.", e)
                 }
     }
     /**
-     * A function to get the dashboard items list. The list will be an overall items list, not based on the user's id.
+     * Uma função para obter a lista de itens do painel. A lista será uma lista geral de itens, não baseada na id do usuário
      */
     fun getDashboardItemsList(fragment: DashboardFragment) {
-        // The collection name for PRODUCTS
         mFireStore.collection(Constants.PRODUCTS)
-                .get() // Will get the documents snapshots.
+                .get()
                 .addOnSuccessListener { document ->
 
-                    // Here we get the list of boards in the form of documents.
+                    // Log com a lista de produtos
                     Log.e(fragment.javaClass.simpleName, document.documents.toString())
 
-                    // Here we have created a new instance for Products ArrayList.
+                    // Cria um ArrayList.
                     val productsList: ArrayList<Product> = ArrayList()
 
-                    // A for loop as per the list of documents to convert them into Products ArrayList.
+                    // Um loop  que percorre a lista de documentos convertendo produtos em um ArrayList.
                     for (i in document.documents) {
 
                         val product = i.toObject(Product::class.java)!!
@@ -269,17 +302,20 @@ class FireStoreClass {
                         productsList.add(product)
                     }
 
-                    // Pass the success result to the base fragment.
+                    // Passe o resultado do sucesso para base fragment.
                     fragment.successDashboardItemsList(productsList)
                 }
                 .addOnFailureListener { e ->
-                    // Hide the progress dialog if there is any error which getting the dashboard items list.
-                   // fragment.hideProgressDialog()
-                    Log.e(fragment.javaClass.simpleName, "Error while getting dashboard items list.", e)
+                    //TODO ESCONDER O BARRA PROGRESSO
+                    Log.e(
+                        fragment.javaClass.simpleName,
+                        "Erro ao obter a lista de itens do painel.",
+                        e
+                    )
                 }
     }
     /**
-     * A function to delete the product from the cloud firestore.
+     * Uma função para excluir o produto  - Firestore
      */
     fun deleteProduct(fragment: ProductsFragment, productId: String) {
 
@@ -291,13 +327,78 @@ class FireStoreClass {
 
                 }
                 .addOnFailureListener { e ->
+                    //TODO ESCONDER O BARRA PROGRESSO
                     Log.e(
-                            fragment.requireActivity().javaClass.simpleName,
-                            "Error while deleting the product.",
+                        fragment.requireActivity().javaClass.simpleName,
+                        "Erro ao excluir o produto.",
+                        e
+                    )
+                }
+    }
+
+    fun getProdructDetails(activity: ProductDetailsActivity, productId: String){
+        mFireStore.collection(Constants.PRODUCTS)
+                .document(productId)
+                .get()
+                .addOnSuccessListener { document ->
+                    Log.e(activity.javaClass.simpleName, document.toString())
+                    val product = document.toObject(Product::class.java) //cria o objeto Produto
+                    if (product != null){
+                        activity.productDetailsSuccess(product)
+                    }
+
+                }
+                .addOnFailureListener{ e ->
+                    //TODO ESCONDER O BARRA PROGRESSO
+                    Log.e(activity.javaClass.simpleName, "Erro enquanto carregava dados do produto", e)
+                }
+    }
+    /**
+     * Uma função para adicionar o item ao carrinho no firestore.
+     * @param activity
+     * @param addToCart
+     */
+    fun addCartItems(activity: ProductDetailsActivity, addToCart: CartItem) {
+
+        mFireStore.collection(Constants.CART_ITEMS)
+                .document()
+                .set(addToCart, SetOptions.merge())
+                .addOnSuccessListener {
+                    activity.addToCartSuccess()
+                }
+                .addOnFailureListener { e ->
+                    //TODO ESCONDER O BARRA PROGRESSO
+                    Log.e(
+                            activity.javaClass.simpleName,
+                            "Erro ao criar uma coleção para o item do carrinho.",
                             e
                     )
                 }
     }
+
+    /**
+     * Função que verifica se existe o item no carrinho
+     */
+    fun checkIfItemExistInCart(activity: ProductDetailsActivity, productId: String){
+        mFireStore.collection(Constants.CART_ITEMS)
+                .whereEqualTo(Constants.USER_ID,getUserIDAtual())
+                .whereEqualTo(Constants.PRODUCT_ID, productId)
+                .get()
+                .addOnSuccessListener{ document ->
+                    Log.e(activity.javaClass.simpleName, document.documents.toString())
+
+                    //Se o tamanho do documento for maior que 1, significa que o produto já foi adicionado ao carrinho.
+                    if (document.documents.size > 0) {
+                        activity.productExistsInCart()
+                    } else {
+                        //TODO ESCONDER O BARRA PROGRESSO
+                    }
+
+                }.addOnFailureListener { e ->
+                    Log.e(activity.javaClass.simpleName, "Erro enquanto checava se o item existe no carrinho")
+                }
+    }
+
 
 
 

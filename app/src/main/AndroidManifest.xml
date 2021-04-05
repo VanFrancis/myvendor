@@ -12,7 +12,11 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyVendor">
-        <activity android:name=".view.activities.ProductDetailsActivity"
+        <activity android:name=".view.activities.CartListActivity"
+                  android:theme="@style/Theme.MyVendor.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.activities.ProductDetailsActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
         </activity>
         <activity

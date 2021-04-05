@@ -93,5 +93,23 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    //Product Details
+    <string name="title_product_details">Detalhe do Produto</string>
+    <string name="lbl_product_description">Descrição</string>
+    <string name="lbl_product_details_stock_quantity">Quantidade Disponivél</string>
+
+    //Cart
+    <string name="btn_lbl_add_to_cart">Adicionar ao Pedido</string>
+    <string name="success_message_item_added_to_cart">Produto adicionado com sucesso!</string>
+    <string name="btn_lbl_go_to_cart">Ir ao Carrinho</string>
+
+    <string name="title_my_cart">Meu Pedido</string>
+    <string name="no_cart_item_found">Nenhum item encontrado no carrinho!</string>
+    <string name="lbl_subtotal">Subtotal</string>
+    <string name="lbl_shipping_charge">Frete</string>
+    <string name="lbl_total_amount">Valor Total</string>
+    <string name="btn_lbl_checkout">Fechar Pedido</string>
+    <string name="action_cart">Meu Carrinho</string>
+
 
 </resources>
