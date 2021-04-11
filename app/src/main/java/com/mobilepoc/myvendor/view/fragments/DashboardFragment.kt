@@ -12,6 +12,7 @@ import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.model.FireStoreClass
 import com.mobilepoc.myvendor.model.Product
 import com.mobilepoc.myvendor.utils.Constants
+import com.mobilepoc.myvendor.view.activities.CartListActivity
 import com.mobilepoc.myvendor.view.activities.ProductDetailsActivity
 import com.mobilepoc.myvendor.view.activities.SettingsActivity
 import com.mobilepoc.myvendor.view.adapters.DashboardItemsListAdapter
@@ -49,6 +50,10 @@ class DashboardFragment : Fragment() {
         when(item.itemId){
             R.id.action_settings -> {
                 startActivity(Intent(requireContext(),SettingsActivity::class.java))
+                return true
+            }
+            R.id.action_cart ->{
+                startActivity(Intent(requireContext(),CartListActivity::class.java))
                 return true
             }
         }
