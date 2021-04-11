@@ -1,11 +1,13 @@
 package com.mobilepoc.myvendor.view.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityProductDetailsBinding
 import com.mobilepoc.myvendor.model.CartItem
@@ -73,13 +75,21 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
         tv_product_details_description.text = product.description
         tv_product_details_available_quantity.text = product.stock_quantity
 
-       if (FireStoreClass().getUserIDAtual() != product.user_id){
+        if (product.stock_quantity.toInt() == 0){
             //TODO ESCONDER O BARRA PROGRESSO
+            btn_add_to_cart.visibility = View.GONE
+            tv_product_details_available_quantity.text = resources.getString(R.string.lbl_out_of_stock)
+            tv_product_details_quantity.setTextColor(
+                    ContextCompat.getColor(this,R.color.sea_pink)
+            )
+        }else{
+            if (FireStoreClass().getUserIDAtual() != product.user_id){
+                //TODO ESCONDER O BARRA PROGRESSO
 
-       }else{
-           FireStoreClass().checkIfItemExistInCart(this,mProductId)
-       }
-
+            }else{
+                FireStoreClass().checkIfItemExistInCart(this,mProductId)
+            }
+        }
     }
 
     private fun setupActionBar() {

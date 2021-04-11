@@ -400,19 +400,18 @@ class FireStoreClass {
     }
 
     fun getCartList(activity: Activity) {
-        // The collection name for PRODUCTS
+        // seleciona a coleção Cart_Items
         mFireStore.collection(Constants.CART_ITEMS)
                 .whereEqualTo(Constants.USER_ID, getUserIDAtual())
-                .get() // Will get the documents snapshots.
+                .get()
                 .addOnSuccessListener { document ->
 
-                    // Here we get the list of cart items in the form of documents.
+                    // Log com a lista de item
                     Log.e(activity.javaClass.simpleName, document.documents.toString())
 
-                    // Here we have created a new instance for Cart Items ArrayList.
                     val list: ArrayList<CartItem> = ArrayList()
 
-                    // A for loop as per the list of documents to convert them into Cart Items ArrayList.
+                    //Loop na coleção Cart_items.
                     for (i in document.documents) {
 
                         val cartItem = i.toObject(CartItem::class.java)!!
@@ -428,18 +427,81 @@ class FireStoreClass {
                     }
                 }
                 .addOnFailureListener { e ->
-                    // Hide the progress dialog if there is an error based on the activity instance.
+
                     when (activity) {
                         is CartListActivity -> {
                             //TODO ESCONDER O BARRA PROGRESSO
                         }
                     }
 
-                    Log.e(activity.javaClass.simpleName, "Error while getting the cart list items.", e)
+                    Log.e(activity.javaClass.simpleName, "Erro ao obter os itens da lista do carrinho.", e)
                 }
     }
 
+    fun getAllProductsList(activity: CartListActivity){
+        mFireStore.collection(Constants.PRODUCTS)
+                .get()
+                .addOnSuccessListener { document ->
 
+                    Log.e("Products List", document.documents.toString())
+                    val productList: ArrayList<Product> = ArrayList()
 
+                    for (i in document.documents){
+                        val product = i.toObject(Product::class.java)
+                        product!!.product_id = i.id
+
+                        productList.add(product)
+                    }
+
+                    activity.successProductListFromFireStore(productList)
+
+                }.addOnFailureListener { e ->
+                    Log.e("Get Product List", "getAllProductsList: Erro enquanto captura todos os produtos", e)
+                }
+    }
+
+    fun removeItemFromCart(context: Context, cart_id: String){
+        mFireStore.collection(Constants.CART_ITEMS)
+                .document(cart_id)
+                .delete()
+                .addOnSuccessListener {
+                    when (context) {
+                        is CartListActivity -> {
+                            context.itemRemovedSuccess()
+                        }
+                    }
+
+                }.addOnFailureListener { e ->
+                    when(context){
+                        is CartListActivity -> {
+                            //TODO ESCONDER O BARRA PROGRESSO
+                        }
+                    }
+                    Log.e(context.javaClass.simpleName, "removeItemFromCart: Erro ao remover um item do carrinho", e)
+                }
+    }
+    fun updateMyCart(context: Context, cart_id: String, itemHashMap: HashMap<String, Any>){
+        mFireStore.collection(Constants.CART_ITEMS)
+                .document(cart_id)
+                .update(itemHashMap)
+                .addOnSuccessListener{
+                    when(context){
+                        is CartListActivity ->{
+                            context.itemUpdateSuccess()
+                        }
+                    }
+
+                }.addOnFailureListener { e ->
+                    when(context){
+                        is CartListActivity -> {
+                            //TODO ESCONDER O BARRA PROGRESSO
+                        }
+                    }
+
+                    Log.e(context.javaClass.simpleName, "updateMyCart: Erro ao atualizar o carrinho", e)
+
+                }
+
+    }
 
 }

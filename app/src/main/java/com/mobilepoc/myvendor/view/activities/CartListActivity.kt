@@ -9,12 +9,19 @@ import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityCartListBinding
 import com.mobilepoc.myvendor.model.CartItem
 import com.mobilepoc.myvendor.model.FireStoreClass
+import com.mobilepoc.myvendor.model.Product
+import com.mobilepoc.myvendor.utils.Util
 import com.mobilepoc.myvendor.view.adapters.CartItemsListAdapter
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_cart_list.*
 
 
 
-class CartListActivity : AppCompatActivity(), View.OnClickListener {
+class CartListActivity : BaseActivity(), View.OnClickListener {
+
+    private lateinit var mProductsList: ArrayList<Product>
+    private lateinit var mCartListItem: ArrayList<CartItem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityCartListBinding.inflate(layoutInflater)
@@ -29,7 +36,21 @@ class CartListActivity : AppCompatActivity(), View.OnClickListener {
     fun successCartItemsList(cartList: ArrayList<CartItem>){
         //TODO ESCONDER O BARRA PROGRESSO
 
-        if (cartList.size > 0 ){
+        for (product in mProductsList){
+            for (cartItem in cartList){
+                if (product.product_id == cartItem.product_id){
+                    cartItem.stock_quantity = product.stock_quantity
+
+                    if (product.stock_quantity.toInt()== 0){
+                        cartItem.cart_quantity = product.stock_quantity
+                    }
+                }
+            }
+        }
+
+        mCartListItem = cartList
+
+        if (mCartListItem.size > 0 ){
             rv_cart_items_list.visibility = View.VISIBLE
             ll_checkout.visibility = View.VISIBLE //LinearLayout
             tv_no_cart_item_found.visibility = View.GONE
@@ -39,17 +60,21 @@ class CartListActivity : AppCompatActivity(), View.OnClickListener {
 
             val cartListAdapter = CartItemsListAdapter(this, cartList)
             rv_cart_items_list.adapter = cartListAdapter
-            var subTotal: Double = 0.0
+            var subTotal: Double = 0.00
 
-            for (item in cartList) {
-                val price = item.price.toDouble()
-                val quantity = item.cart_quantity.toInt()
+            for (item in mCartListItem) {
+                val availableQuantity = item.stock_quantity.toInt()
+                if (availableQuantity > 0 ){
+                    val price = item.price.toDouble()
+                    val quantity = item.cart_quantity.toInt()
 
-                subTotal += (price * quantity)
+                    subTotal += (price * quantity)
+
+                }
             }
 
             tv_sub_total.text = "R$ $subTotal"
-            // Here we have kept Shipping Charge is fixed as $10 but in your case it may cary. Also, it depends on the location and total amount.
+            //Valor fixo do frete
             tv_shipping_charge.text = "R$ 10.00"
 
             if (subTotal > 0) {
@@ -67,16 +92,36 @@ class CartListActivity : AppCompatActivity(), View.OnClickListener {
             tv_no_cart_item_found.visibility = View.VISIBLE
         }
     }
-
     override fun onResume() {
         super.onResume()
+        getProductsList()
+    }
+
+    fun successProductListFromFireStore(productsList: ArrayList<Product>){
+        mProductsList = productsList
         getCartitemsList()
+
+    }
+    private fun getProductsList(){
+        //TODO EXIBE O BARRA PROGRESSO
+        FireStoreClass().getAllProductsList(this)
     }
 
     private fun getCartitemsList(){
-        //TODO EXIBE O BARRA PROGRESSO
         FireStoreClass().getCartList(this)
     }
+
+    fun itemRemovedSuccess(){
+        Util.exibirToast(baseContext, resources.getString(R.string.mgs_item_removed_successfully))
+
+        getCartitemsList()
+    }
+
+    fun itemUpdateSuccess(){
+        //TODO ESCONDE O BARRA PROGRESSO
+        getCartitemsList()
+    }
+
 
     private fun setupActionBar() {
         setSupportActionBar(toolbar_cart_list_activity)
