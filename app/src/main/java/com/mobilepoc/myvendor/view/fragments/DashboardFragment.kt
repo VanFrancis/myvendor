@@ -20,7 +20,7 @@ import com.mobilepoc.myvendor.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.FieldPosition
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
 
@@ -67,23 +67,19 @@ class DashboardFragment : Fragment() {
 
 
     /**
-     * A function to get the dashboard items list from cloud firestore.
+     * Função para obter a lista de itens do painel do Firestore
      */
     private fun getDashboardItemsList() {
-        // Show the progress dialog.
-        //showProgressDialog(resources.getString(R.string.please_wait))
+        showProgressDialog()
 
         FireStoreClass().getDashboardItemsList(this@DashboardFragment)
     }
     /**
-     * A function to get the success result of the dashboard items from cloud firestore.
-     *
-     * @param dashboardItemsList
+     * Função para obter o resultado de sucesso dos itens do painel do Cloud Firestore.
      */
     fun successDashboardItemsList(dashboardItemsList: ArrayList<Product>) {
 
-        // Hide the progress dialog.
-       // hideProgressDialog()
+        hideProgressDialog()
 
         if (dashboardItemsList.size > 0) {
 
@@ -96,14 +92,6 @@ class DashboardFragment : Fragment() {
             val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             rv_dashboard_items.adapter = adapter
 
-           /* adapter.setOnClickListener(object: DashboardItemsListAdapter.OnClickListener {
-                override fun onClick(position: Int, product: Product) {
-                    val intent = Intent(context, ProductDetailsActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
-                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
-                    startActivity(intent)
-                }
-            })*/
 
         } else {
             rv_dashboard_items.visibility = View.GONE

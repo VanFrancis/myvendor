@@ -20,7 +20,7 @@ import com.mobilepoc.myvendor.view.adapters.MyProductsListAdapter
 import com.mobilepoc.myvendor.viewmodel.ProductsViewModel
 import kotlinx.android.synthetic.main.fragment_products.*
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : BaseFragment() {
 
     private lateinit var productsViewModel: ProductsViewModel
 
@@ -60,11 +60,10 @@ class ProductsFragment : Fragment() {
     }
 
     /**
-     * A function to get the successful product list from cloud firestore.
-     *
-     * @param productsList Will receive the product list from cloud firestore.
+     * Uma função para obter a lista de produtos Firestore.
      */
     fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
+        hideProgressDialog()
 
         for (i in productsList){
             Log.i("Product Name", i.title)
@@ -86,23 +85,19 @@ class ProductsFragment : Fragment() {
     }
 
     private fun getProductListFromFireStore() {
-        // Show the progress dialog.
-       // showProgressDialog(resources.getString(R.string.please_wait))
-
-        // Call the function of Firestore class.
+        showProgressDialog()
         FireStoreClass().getProductsList(this@ProductsFragment)
     }
 
     /**
-     * A function that will call the delete function of FirestoreClass that will delete the product added by the user.
-     *
-     * @param productID To specify which product need to be deleted.
+     * Função que irá chamar a função delete de FirestoreClass que irá deletar o produto adicionado pelo usuário.
      */
     fun deleteProduct(productID: String) {
         showAlertDialogToDeleteProduct(productID)
     }
 
     fun productDeleteSuccess() {
+        hideProgressDialog()
         Toast.makeText(
                 requireActivity(),
                 resources.getString(R.string.product_delete_success_message),
@@ -112,36 +107,35 @@ class ProductsFragment : Fragment() {
         getProductListFromFireStore()
     }
     /**
-     * A function to show the alert dialog for the confirmation of delete product from cloud firestore.
+     * Função para mostrar o diálogo de alerta para a confirmação da exclusão do produto do Firestore.
      */
     private fun showAlertDialogToDeleteProduct(productID: String) {
 
         val builder = AlertDialog.Builder(requireActivity())
-        //set title for alert dialog
+        //Titulo
         builder.setTitle(resources.getString(R.string.delete_dialog_title))
-        //set message for alert dialog
+        //Mensagem
         builder.setMessage(resources.getString(R.string.delete_dialog_message))
         builder.setIcon(android.R.drawable.ic_dialog_alert)
 
-        //performing positive action
+        //Sim
         builder.setPositiveButton(resources.getString(R.string.yes)) { dialogInterface, _ ->
 
-            //showProgressDialog(resources.getString(R.string.please_wait))
+            showProgressDialog()
 
-            // Call the function of Firestore class.
+            // Chama função para apagar
             FireStoreClass().deleteProduct(this, productID)
 
             dialogInterface.dismiss()
         }
 
-        //performing negative action
+        //pNão
         builder.setNegativeButton(resources.getString(R.string.no)) { dialogInterface, _ ->
 
             dialogInterface.dismiss()
         }
-        // Create the AlertDialog
+        // Cria o Dialog
         val alertDialog: AlertDialog = builder.create()
-        // Set other dialog properties
         alertDialog.setCancelable(false)
         alertDialog.show()
     }

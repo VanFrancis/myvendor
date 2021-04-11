@@ -8,9 +8,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityForgotPasswordBinding
 import com.mobilepoc.myvendor.utils.Util
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
-class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
+class ForgotPasswordActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
@@ -39,9 +40,11 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
         if(validateRegisterDetails()) {
             val email: String = et_email.text.toString().trim { it <= ' ' }
 
+            showProgressDialog()
             //create instance
             FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
+                    hideProgressDialog()
                     if (task.isSuccessful) {
                         Util.exibirToast(this,"E-mail enviado com sucesso")
                         finish()

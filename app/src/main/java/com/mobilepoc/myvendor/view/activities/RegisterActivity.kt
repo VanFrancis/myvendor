@@ -16,8 +16,9 @@ import com.mobilepoc.myvendor.utils.DialogProgress
 import com.mobilepoc.myvendor.utils.Util
 import kotlinx.android.synthetic.main.activity_register.*
 import com.mobilepoc.myvendor.model.FireStoreClass
+import com.myshoppal.ui.activities.BaseActivity
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener {
+class RegisterActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -96,6 +97,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         // Verifica se os campos são válidos
         if (validateRegisterDetails()) {
 
+            showProgressDialog()
+
             val email: String = et_email.text.toString().trim { it <= ' ' }
             val password: String = et_password.text.toString().trim { it <= ' ' }
 
@@ -125,6 +128,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         //FirebaseAuth.getInstance().signOut()
                         //finish()
                     } else {
+                        hideProgressDialog()
                         // Se não for sucesso, msg de erro
                         val erro = task.exception.toString()
                         Util.exibirToast(this,erro)
@@ -147,12 +151,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun userRegistrationSuccess(){
+        hideProgressDialog()
+        Util.exibirToast(baseContext, resources.getString(R.string.register_success))
 
-        Toast.makeText(
-            this@RegisterActivity,
-            resources.getString(R.string.register_success),
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
 }

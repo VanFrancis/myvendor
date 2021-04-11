@@ -19,10 +19,11 @@ import com.mobilepoc.myvendor.model.User
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.mobilepoc.myvendor.utils.Util
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
-class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
+class UserProfileActivity : BaseActivity(), View.OnClickListener {
     private lateinit var mUserDetails: User
     private  var mSelectedImageFileUri: Uri? = null
     private var mUserProfileImageURL: String = ""
@@ -117,6 +118,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 R.id.btn_submit -> {
                     if (validateUserProfileDetails()) {
+                        showProgressDialog()
                         if (mSelectedImageFileUri != null)
                             FireStoreClass().uploadImageToCloudStorage(this@UserProfileActivity, mSelectedImageFileUri, Constants.USER_PROFILE_IMAGE)
 
@@ -176,6 +178,7 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener {
      * função para notificar o resultado do sucesso e prosseguir de acordo com a atualização dos detalhes do usuário.
      */
     fun userProfileUpdateSuccess(){
+        hideProgressDialog()
         Util.exibirToast(baseContext,resources.getString(R.string.mgs_profile_update_success))
 
         startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))

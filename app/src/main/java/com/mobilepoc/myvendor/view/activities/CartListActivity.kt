@@ -34,7 +34,7 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun successCartItemsList(cartList: ArrayList<CartItem>){
-        //TODO ESCONDER O BARRA PROGRESSO
+        hideProgressDialog()
 
         for (product in mProductsList){
             for (cartItem in cartList){
@@ -103,7 +103,7 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
 
     }
     private fun getProductsList(){
-        //TODO EXIBE O BARRA PROGRESSO
+        showProgressDialog()
         FireStoreClass().getAllProductsList(this)
     }
 
@@ -112,13 +112,13 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun itemRemovedSuccess(){
+        hideProgressDialog()
         Util.exibirToast(baseContext, resources.getString(R.string.mgs_item_removed_successfully))
-
         getCartitemsList()
     }
 
     fun itemUpdateSuccess(){
-        //TODO ESCONDE O BARRA PROGRESSO
+        hideProgressDialog()
         getCartitemsList()
     }
 

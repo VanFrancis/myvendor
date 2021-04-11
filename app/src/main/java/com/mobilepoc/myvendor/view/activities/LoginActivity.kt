@@ -15,13 +15,14 @@ import com.google.firebase.auth.ktx.auth
 import com.mobilepoc.myvendor.model.FireStoreClass
 import com.mobilepoc.myvendor.model.User
 import com.mobilepoc.myvendor.utils.Constants
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.et_email
 import kotlinx.android.synthetic.main.activity_login.et_password
 import kotlinx.android.synthetic.main.activity_register.*
 
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,9 +88,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun logInRegisteredUser() {
         if (validacaoLogin()) {
-
-            val dialogoProgress = DialogProgress()
-            dialogoProgress.show(supportFragmentManager,"1")
+            showProgressDialog()
 
             // Pega o texto do EditText retirando os espaços
             val email = et_email.text.toString().trim { it <= ' ' }
@@ -98,10 +97,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             // Login usando firebase
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    dialogoProgress.dismiss()
+
                     if (task.isSuccessful) {
                         FireStoreClass().getUserDetails(this)
                     } else {
+                        hideProgressDialog()
                         val erro = task.exception.toString()
                         errosFirebase(erro)
                     }
@@ -113,6 +113,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      * Função para notificar o usuário que efetuou login com sucesso e obter os detalhes do usuário do banco FireStore após a autenticação.
      */
     fun userLoggedInSuccess(user: User) {
+        hideProgressDialog()
         if (user.profileCompleted == 0) {
             // Se o perfil do usuário estiver incompleto, inicie o UserProfileActivity.
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)

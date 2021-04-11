@@ -11,7 +11,6 @@ class DialogProgress : DialogFragment() {
     init {
 
     }
-
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
@@ -21,7 +20,7 @@ class DialogProgress : DialogFragment() {
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        isCancelable.to(true)
+        isCancelable.to(false)
 
     }
 }

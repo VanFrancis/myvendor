@@ -16,11 +16,12 @@ import com.mobilepoc.myvendor.model.Product
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.mobilepoc.myvendor.utils.Util
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import kotlinx.android.synthetic.main.activity_product_details.*
 import kotlinx.android.synthetic.main.activity_register.*
 
-class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
+class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private var mProductId: String = ""
     private lateinit var mProductDetails: Product
@@ -57,7 +58,7 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getProductDetails(){
-        //TODO EXIBIR O BARRA PROGRESSO
+        showProgressDialog()
         FireStoreClass().getProdructDetails(this, mProductId )
     }
 
@@ -76,7 +77,7 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
         tv_product_details_available_quantity.text = product.stock_quantity
 
         if (product.stock_quantity.toInt() == 0){
-            //TODO ESCONDER O BARRA PROGRESSO
+            hideProgressDialog()
             btn_add_to_cart.visibility = View.GONE
             tv_product_details_available_quantity.text = resources.getString(R.string.lbl_out_of_stock)
             tv_product_details_quantity.setTextColor(
@@ -84,7 +85,7 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
             )
         }else{
             if (FireStoreClass().getUserIDAtual() != product.user_id){
-                //TODO ESCONDER O BARRA PROGRESSO
+                hideProgressDialog()
 
             }else{
                 FireStoreClass().checkIfItemExistInCart(this,mProductId)
@@ -112,14 +113,14 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
                 mProductDetails.image,
                 Constants.DEFAULT_CART_QUANTITY
         )
-        //TODO EXIBIR O BARRA PROGRESSO
+        showProgressDialog()
 
         FireStoreClass().addCartItems(this, cartItem)
     }
 
     //Msg de sucesso
     fun addToCartSuccess() {
-        //TODO ESCONDER O BARRA PROGRESSO
+        hideProgressDialog()
         Util.exibirToast(baseContext,resources.getString(R.string.success_message_item_added_to_cart))
 
         btn_add_to_cart.visibility = View.GONE
@@ -142,7 +143,7 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
      * Existe uma função para notificar o resultado de sucesso do item no carrinho.
      */
     fun productExistsInCart() {
-        //TODO ESCONDER O BARRA PROGRESSO
+        hideProgressDialog()
         btn_add_to_cart.visibility = View.GONE
         btn_go_to_cart.visibility = View.VISIBLE
     }

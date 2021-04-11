@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.mobilepoc.myvendor.R
+import com.mobilepoc.myvendor.utils.DialogProgress
 import com.mobilepoc.myvendor.utils.Util
 import kotlinx.android.synthetic.main.dialog_progress.*
 
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.dialog_progress.*
 open class BaseActivity : AppCompatActivity() {
 
     private var doubleBackToExitPressedOnce = false
+    val dialogoProgress = DialogProgress()
     /**
      * Uma função para mostrar o sucesso e mensagens e de erro no componente snack bar
      */
@@ -50,6 +52,12 @@ open class BaseActivity : AppCompatActivity() {
 
         @Suppress("DEPRECATION")
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+    }
+    fun showProgressDialog(){
+        dialogoProgress.show(supportFragmentManager,"1")
+    }
+    fun hideProgressDialog(){
+        dialogoProgress.dismiss()
     }
 
 }

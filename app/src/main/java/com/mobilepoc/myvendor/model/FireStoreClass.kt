@@ -50,7 +50,7 @@ class FireStoreClass {
                 activity.userRegistrationSuccess()
             }
             .addOnFailureListener { e ->
-                //TODO ESCONDER O BARRA PROGRESSO
+                activity.hideProgressDialog()
                 Log.e(
                     activity.javaClass.simpleName,
                     "Falha ao tentar registrar um usuário.",
@@ -112,10 +112,10 @@ class FireStoreClass {
             .addOnFailureListener { e ->
                 when (activity) {
                     is LoginActivity -> {
-                        //TODO ESCONDER O BARRA PROGRESSO
+                        activity.hideProgressDialog()
                     }
                     is SettingsActivity -> {
-                        //TODO ESCONDER O BARRA PROGRESSO
+                        activity.hideProgressDialog()
                     }
                 }
                 Log.e(
@@ -152,7 +152,7 @@ class FireStoreClass {
 
                 when (activity) {
                     is UserProfileActivity -> {
-                        //TODO ESCONDER O BARRA PROGRESSO
+                        activity.hideProgressDialog()
                     }
                 }
                 Log.e(
@@ -203,11 +203,11 @@ class FireStoreClass {
             .addOnFailureListener { exception ->
                 when (activity) {
                     is UserProfileActivity -> {
-                        //TODO ESCONDER O BARRA PROGRESSO
+                        activity.hideProgressDialog()
                     }
 
                     is AddProductActivity -> {
-                        //TODO ESCONDER O BARRA PROGRESSO
+                       activity.hideProgressDialog()
                     }
                 }
                 Log.e(
@@ -231,7 +231,7 @@ class FireStoreClass {
                     activity.productUploadSuccess()
                 }
                 .addOnFailureListener { e ->
-                    //TODO ESCONDER O BARRA PROGRESSO
+                    activity.hideProgressDialog()
                     Log.e(
                         activity.javaClass.simpleName,
                         "Erro ao enviar os detalhes do produto",
@@ -349,7 +349,7 @@ class FireStoreClass {
 
                 }
                 .addOnFailureListener{ e ->
-                    //TODO ESCONDER O BARRA PROGRESSO
+                    activity.hideProgressDialog()
                     Log.e(activity.javaClass.simpleName, "Erro enquanto carregava dados do produto", e)
                 }
     }
@@ -367,7 +367,7 @@ class FireStoreClass {
                     activity.addToCartSuccess()
                 }
                 .addOnFailureListener { e ->
-                    //TODO ESCONDER O BARRA PROGRESSO
+                    activity.hideProgressDialog()
                     Log.e(
                             activity.javaClass.simpleName,
                             "Erro ao criar uma coleção para o item do carrinho.",
@@ -391,10 +391,11 @@ class FireStoreClass {
                     if (document.documents.size > 0) {
                         activity.productExistsInCart()
                     } else {
-                        //TODO ESCONDER O BARRA PROGRESSO
+                       activity.hideProgressDialog()
                     }
 
                 }.addOnFailureListener { e ->
+                    activity.hideProgressDialog()
                     Log.e(activity.javaClass.simpleName, "Erro enquanto checava se o item existe no carrinho")
                 }
     }
@@ -430,7 +431,7 @@ class FireStoreClass {
 
                     when (activity) {
                         is CartListActivity -> {
-                            //TODO ESCONDER O BARRA PROGRESSO
+                           activity.hideProgressDialog()
                         }
                     }
 
@@ -456,6 +457,7 @@ class FireStoreClass {
                     activity.successProductListFromFireStore(productList)
 
                 }.addOnFailureListener { e ->
+                    activity.hideProgressDialog()
                     Log.e("Get Product List", "getAllProductsList: Erro enquanto captura todos os produtos", e)
                 }
     }
@@ -474,7 +476,7 @@ class FireStoreClass {
                 }.addOnFailureListener { e ->
                     when(context){
                         is CartListActivity -> {
-                            //TODO ESCONDER O BARRA PROGRESSO
+                            context.hideProgressDialog()
                         }
                     }
                     Log.e(context.javaClass.simpleName, "removeItemFromCart: Erro ao remover um item do carrinho", e)
@@ -494,7 +496,7 @@ class FireStoreClass {
                 }.addOnFailureListener { e ->
                     when(context){
                         is CartListActivity -> {
-                            //TODO ESCONDER O BARRA PROGRESSO
+                            context.hideProgressDialog()
                         }
                     }
 

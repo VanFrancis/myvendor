@@ -76,7 +76,7 @@
     <string name="et_hint_product_quantity">Quantidade</string>
     <string name="product_delete_success_message">Seu produto foi excluído com sucesso.</string>
     <string name="delete_dialog_title">Excluir</string>
-    <string name="delete_dialog_message">Você tem certeza que deseja EXCLUIR esse produto??</string>
+    <string name="delete_dialog_message">Você tem certeza que deseja EXCLUIR esse produto?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
 

@@ -21,11 +21,12 @@ import com.mobilepoc.myvendor.model.Product
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.mobilepoc.myvendor.utils.Util
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_add_product.*
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import java.io.IOException
 
-class AddProductActivity : AppCompatActivity(), View.OnClickListener {
+class AddProductActivity : BaseActivity(), View.OnClickListener {
 
     private var mSelectedImageFileUri: Uri? = null
     private var mProductImageURL: String = ""
@@ -149,6 +150,7 @@ class AddProductActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
     private fun uploadProductImage(){
+        showProgressDialog()
         FireStoreClass().uploadImageToCloudStorage(
                 this@AddProductActivity,
                 mSelectedImageFileUri,
@@ -160,6 +162,7 @@ class AddProductActivity : AppCompatActivity(), View.OnClickListener {
      * Função que retorna sucesso se o produto foi atualizado
      */
     fun productUploadSuccess() {
+        hideProgressDialog()
         Util.exibirToast(baseContext, resources.getString(R.string.product_uploaded_success_message))
         finish()
     }

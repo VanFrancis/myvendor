@@ -12,9 +12,10 @@ import com.mobilepoc.myvendor.model.FireStoreClass
 import com.mobilepoc.myvendor.model.User
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
+import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
-class SettingsActivity : AppCompatActivity(), View.OnClickListener {
+class SettingsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var mUserDetails: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,12 +38,14 @@ class SettingsActivity : AppCompatActivity(), View.OnClickListener {
     * Função da classe Firestore para obter os detalhes do usuário do firestore que já foi criado.
      */
     private fun getUserDetails() {
+        showProgressDialog()
         FireStoreClass().getUserDetails(this)
     }
 
     fun userDetailsSuccess(user: User) {
         mUserDetails = user
 
+        hideProgressDialog()
         GlideLoader(this@SettingsActivity).loadUserPicture(user.image, iv_user_photo)
 
         tv_name.text = "${user.firstName} ${user.lastName}"
