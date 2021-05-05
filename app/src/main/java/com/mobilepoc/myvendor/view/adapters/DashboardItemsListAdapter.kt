@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepoc.myvendor.R
-import com.mobilepoc.myvendor.model.Product
+import com.mobilepoc.myvendor.data.entites.Product
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.mobilepoc.myvendor.view.activities.ProductDetailsActivity
@@ -60,7 +60,7 @@ open class DashboardItemsListAdapter(
                     holder.itemView.iv_dashboard_item_image
             )
             holder.itemView.tv_dashboard_item_title.text = model.title
-            holder.itemView.tv_dashboard_item_price.text = "$${model.price}"
+            holder.itemView.tv_dashboard_item_price.text = "R$ ${model.price}"
 
             holder.itemView.setOnClickListener{
                 val intent = Intent(context, ProductDetailsActivity::class.java)

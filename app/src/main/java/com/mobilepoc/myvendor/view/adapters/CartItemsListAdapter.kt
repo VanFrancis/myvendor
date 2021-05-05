@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepoc.myvendor.R
-import com.mobilepoc.myvendor.model.CartItem
-import com.mobilepoc.myvendor.model.FireStoreClass
+import com.mobilepoc.myvendor.data.entites.CartItem
+import com.mobilepoc.myvendor.data.model.FireStoreClass
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.mobilepoc.myvendor.view.activities.CartListActivity
@@ -79,7 +79,7 @@ open class CartItemsListAdapter(
 
                 when (context) {
                     is CartListActivity -> {
-                        //TODO EXIBE O BARRA PROGRESSO
+                       context.showProgressDialog()
                     }
                 }
                 FireStoreClass().removeItemFromCart(context, model.id)
@@ -95,7 +95,7 @@ open class CartItemsListAdapter(
                     itemHashMap[Constants.CART_QUANTITY] = (cartQuantity - 1).toString()
 
                     if (context is CartListActivity) {
-                        //TODO EXIBE O BARRA PROGRESSO
+                        context.showProgressDialog()
                     }
 
                     FireStoreClass().updateMyCart(context, model.id, itemHashMap)
@@ -111,9 +111,8 @@ open class CartItemsListAdapter(
 
                     itemHashMap[Constants.CART_QUANTITY] = (cartQuantity + 1).toString()
 
-                    // Show the progress dialog.
                     if (context is CartListActivity) {
-                       // context.showProgressDialog(context.resources.getString(R.string.please_wait))
+                        context.showProgressDialog()
                     }
 
                     FireStoreClass().updateMyCart(context, model.id, itemHashMap)

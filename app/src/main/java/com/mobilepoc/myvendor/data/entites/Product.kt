@@ -1,4 +1,4 @@
-package com.mobilepoc.myvendor.model
+package com.mobilepoc.myvendor.data.entites
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

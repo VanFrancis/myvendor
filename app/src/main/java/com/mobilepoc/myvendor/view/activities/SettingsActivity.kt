@@ -1,15 +1,13 @@
 package com.mobilepoc.myvendor.view.activities
 
 import android.content.Intent
-import android.media.audiofx.BassBoost
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivitySettingsBinding
-import com.mobilepoc.myvendor.model.FireStoreClass
-import com.mobilepoc.myvendor.model.User
+import com.mobilepoc.myvendor.data.model.FireStoreClass
+import com.mobilepoc.myvendor.data.entites.User
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.myshoppal.ui.activities.BaseActivity
@@ -20,13 +18,14 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupActionBar()
 
         binding.tvEdit.setOnClickListener(this)
         binding.btnLogout.setOnClickListener(this)
+        binding.llAddress.setOnClickListener(this)
 
     }
     override fun onResume() {
@@ -80,6 +79,10 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
+                }
+                R.id.ll_address ->{
+                    val intent = Intent(this,AddressListActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }

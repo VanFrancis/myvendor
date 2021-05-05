@@ -1,7 +1,6 @@
 package com.mobilepoc.myvendor.view.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -9,11 +8,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityLoginBinding
-import com.mobilepoc.myvendor.utils.DialogProgress
 import com.mobilepoc.myvendor.utils.Util
 import com.google.firebase.auth.ktx.auth
-import com.mobilepoc.myvendor.model.FireStoreClass
-import com.mobilepoc.myvendor.model.User
+import com.mobilepoc.myvendor.data.model.FireStoreClass
+import com.mobilepoc.myvendor.data.entites.User
 import com.mobilepoc.myvendor.utils.Constants
 import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_login.*

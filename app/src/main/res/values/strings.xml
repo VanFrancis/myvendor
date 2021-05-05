@@ -113,6 +113,37 @@
     <string name="lbl_out_of_stock">Fora de Estoque</string>
     <string name="mgs_item_removed_successfully">Item removido com sucesso!</string>
     <string name="msg_for_available_stock">O estoque disponível é %1$s! Você não pode adicionar mais do que a quantidade em estoque.</string>
+    <string name="action_search">Pesquisar</string>
+
+    //Address
+    <string name="title_address_list">Lista de Endereços</string>
+    <string name="no_address_found">Nenhum endereço foi encontrado</string>
+    <string name="lbL_add_address">Novo Endereço</string>
+
+    <string name="title_add_address">Novo Endereço</string>
+    <string name="hint_full_name">Nome Completo</string>
+    <string name="hint_phone_number">Telefone</string>
+    <string name="hint_address">Endereço</string>
+    <string name="hint_zip_code">CEP</string>
+    <string name="hint_additional_note">Info Adicional</string>
+    <string name="hint_other_details">Outros Detalhes</string>
+    <string name="lbl_home">CASA</string>
+    <string name="lbl_office">TRABALHO</string>
+    <string name="lbl_other">OUTRO</string>
+
+    <string name="err_msg_please_enter_full_name">Por favor, preencha o nome.</string>
+    <string name="err_msg_please_enter_phone_number">Por favor, preencha o telefone.</string>
+    <string name="err_msg_please_enter_address">Por favor, preencha o endereço.</string>
+    <string name="err_msg_please_enter_zip_code">Por favor, preencha o CEP.</string>
+    <string name="err_msg_please_enter_other_details">Por favor, preencha outros detalhes.</string>
+    <string name="err_your_address_added_successfully">Endereço adicionado com sucesso!</string>
+
+    <string name="title_edit_address">Editar Endereço</string>
+    <string name="btn_lbl_update">Atualizar</string>
+    <string name="msg_your_address_updated_successfully">Endereço foi atualizado com sucesso</string>
+
+    <string name="err_your_address_deleted_successfully">Endereço excluído com sucesso</string>
+    <string name="title_select_address">Selecione Endereço</string>
 
 
 </resources>

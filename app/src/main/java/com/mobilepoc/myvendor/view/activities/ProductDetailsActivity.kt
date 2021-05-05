@@ -1,25 +1,19 @@
 package com.mobilepoc.myvendor.view.activities
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.SyncStateContract
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityProductDetailsBinding
-import com.mobilepoc.myvendor.model.CartItem
-import com.mobilepoc.myvendor.model.FireStoreClass
-import com.mobilepoc.myvendor.model.Product
+import com.mobilepoc.myvendor.data.entites.CartItem
+import com.mobilepoc.myvendor.data.model.FireStoreClass
+import com.mobilepoc.myvendor.data.entites.Product
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.GlideLoader
 import com.mobilepoc.myvendor.utils.Util
 import com.myshoppal.ui.activities.BaseActivity
-import kotlinx.android.synthetic.main.activity_forgot_password.*
 import kotlinx.android.synthetic.main.activity_product_details.*
-import kotlinx.android.synthetic.main.activity_register.*
 
 class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
 

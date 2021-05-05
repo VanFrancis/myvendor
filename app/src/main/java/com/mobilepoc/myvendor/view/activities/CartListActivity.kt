@@ -1,15 +1,15 @@
 package com.mobilepoc.myvendor.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityCartListBinding
-import com.mobilepoc.myvendor.model.CartItem
-import com.mobilepoc.myvendor.model.FireStoreClass
-import com.mobilepoc.myvendor.model.Product
+import com.mobilepoc.myvendor.data.entites.CartItem
+import com.mobilepoc.myvendor.data.model.FireStoreClass
+import com.mobilepoc.myvendor.data.entites.Product
+import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.Util
 import com.mobilepoc.myvendor.view.adapters.CartItemsListAdapter
 import com.myshoppal.ui.activities.BaseActivity
@@ -33,15 +33,18 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    fun successCartItemsList(cartList: ArrayList<CartItem>){
+    fun successCartItemsList(cartList: ArrayList<CartItem>) {
+
+        // Hide progress dialog.
         hideProgressDialog()
 
-        for (product in mProductsList){
-            for (cartItem in cartList){
-                if (product.product_id == cartItem.product_id){
+        for (product in mProductsList) {
+            for (cartItem in cartList) {
+                if (product.product_id == cartItem.product_id) {
+
                     cartItem.stock_quantity = product.stock_quantity
 
-                    if (product.stock_quantity.toInt()== 0){
+                    if (product.stock_quantity.toInt() == 0) {
                         cartItem.cart_quantity = product.stock_quantity
                     }
                 }
@@ -50,31 +53,34 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
 
         mCartListItem = cartList
 
-        if (mCartListItem.size > 0 ){
+        if (mCartListItem.size > 0) {
+
             rv_cart_items_list.visibility = View.VISIBLE
-            ll_checkout.visibility = View.VISIBLE //LinearLayout
+            ll_checkout.visibility = View.VISIBLE
             tv_no_cart_item_found.visibility = View.GONE
 
-            rv_cart_items_list.layoutManager = LinearLayoutManager(this)
+            rv_cart_items_list.layoutManager = LinearLayoutManager(this@CartListActivity)
             rv_cart_items_list.setHasFixedSize(true)
 
-            val cartListAdapter = CartItemsListAdapter(this, cartList)
+            val cartListAdapter = CartItemsListAdapter(this@CartListActivity, mCartListItem)
             rv_cart_items_list.adapter = cartListAdapter
-            var subTotal: Double = 0.00
+
+            var subTotal: Double = 0.0
 
             for (item in mCartListItem) {
+
                 val availableQuantity = item.stock_quantity.toInt()
-                if (availableQuantity > 0 ){
+
+                if (availableQuantity > 0) {
                     val price = item.price.toDouble()
                     val quantity = item.cart_quantity.toInt()
 
                     subTotal += (price * quantity)
-
                 }
             }
 
             tv_sub_total.text = "R$ $subTotal"
-            //Valor fixo do frete
+            // Here we have kept Shipping Charge is fixed as $10 but in your case it may cary. Also, it depends on the location and total amount.
             tv_shipping_charge.text = "R$ 10.00"
 
             if (subTotal > 0) {
@@ -99,7 +105,7 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
 
     fun successProductListFromFireStore(productsList: ArrayList<Product>){
         mProductsList = productsList
-        getCartitemsList()
+        getCartItemsList()
 
     }
     private fun getProductsList(){
@@ -107,19 +113,19 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
         FireStoreClass().getAllProductsList(this)
     }
 
-    private fun getCartitemsList(){
+    private fun getCartItemsList(){
         FireStoreClass().getCartList(this)
     }
 
     fun itemRemovedSuccess(){
         hideProgressDialog()
         Util.exibirToast(baseContext, resources.getString(R.string.mgs_item_removed_successfully))
-        getCartitemsList()
+        getCartItemsList()
     }
 
     fun itemUpdateSuccess(){
         hideProgressDialog()
-        getCartitemsList()
+        getCartItemsList()
     }
 
 
@@ -135,6 +141,15 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+        if (v != null ){
+            when(v.id) {
+                R.id.btn_checkout -> {
+                    val intent = Intent(this, AddressListActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_SELECT_ADDRESS,true)
+                    startActivity(intent)
+                }
+            }
+
+        }
     }
 }

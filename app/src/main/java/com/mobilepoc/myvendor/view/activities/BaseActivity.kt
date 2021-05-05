@@ -1,6 +1,10 @@
 package com.myshoppal.ui.activities
 
 
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -8,7 +12,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.utils.DialogProgress
 import com.mobilepoc.myvendor.utils.Util
+import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.dialog_progress.*
+import java.util.*
 
 
 open class BaseActivity : AppCompatActivity() {

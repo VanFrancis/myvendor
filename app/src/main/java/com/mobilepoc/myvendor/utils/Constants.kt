@@ -39,6 +39,16 @@ object Constants {
 
     const val CART_QUANTITY: String = "cart_quantity"
 
+    const val HOME: String = "Casa"
+    const val OFFICE: String = "Trabalho"
+    const val OTHER: String = "Outro"
+
+    const val ADDRESSES: String = "addresses"
+
+    const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
+    const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
+    const val ADD_ADDRESS_REQUEST_CODE: Int = 121
+
     fun showImageChooser(activity: Activity){
         // An intent for launching the image selection of phone storage.
         val galleryIntent = Intent(

@@ -1,21 +1,19 @@
 package com.mobilepoc.myvendor.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityRegisterBinding
-import com.mobilepoc.myvendor.model.User
+import com.mobilepoc.myvendor.data.entites.User
 import com.mobilepoc.myvendor.utils.DialogProgress
 import com.mobilepoc.myvendor.utils.Util
 import kotlinx.android.synthetic.main.activity_register.*
-import com.mobilepoc.myvendor.model.FireStoreClass
+import com.mobilepoc.myvendor.data.model.FireStoreClass
 import com.myshoppal.ui.activities.BaseActivity
 
 class RegisterActivity : BaseActivity(), View.OnClickListener {

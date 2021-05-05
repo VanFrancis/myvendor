@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivitySplashBinding
 
+
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
