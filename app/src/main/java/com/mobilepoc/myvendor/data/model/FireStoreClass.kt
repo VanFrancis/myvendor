@@ -401,7 +401,6 @@ class FireStoreClass {
                     val list: ArrayList<CartItem> = ArrayList()
 
                     for (i in document.documents) {
-
                         val cartItem = i.toObject(CartItem::class.java)!!
                         cartItem.id = i.id
 
@@ -413,8 +412,7 @@ class FireStoreClass {
                             activity.successCartItemsList(list)
                         }
                     }
-                }
-                .addOnFailureListener { e ->
+                }.addOnFailureListener { e ->
                     when (activity) {
                         is CartListActivity -> {
                             activity.hideProgressDialog()

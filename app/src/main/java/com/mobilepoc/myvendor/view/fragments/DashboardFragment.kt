@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.data.model.FireStoreClass
 import com.mobilepoc.myvendor.data.entites.Product
+import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.view.activities.CartListActivity
+import com.mobilepoc.myvendor.view.activities.ProductDetailsActivity
 import com.mobilepoc.myvendor.view.activities.SettingsActivity
 import com.mobilepoc.myvendor.view.adapters.DashboardItemsListAdapter
 import com.mobilepoc.myvendor.viewmodel.DashboardViewModel
@@ -85,6 +87,17 @@ class DashboardFragment : BaseFragment() {
 
             val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             rv_dashboard_items.adapter = adapter
+
+            adapter.setOnClickListener(object :
+                DashboardItemsListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Product) {
+
+                    val intent = Intent(context, ProductDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
+                    startActivity(intent)
+                }
+            })
 
 
         } else {

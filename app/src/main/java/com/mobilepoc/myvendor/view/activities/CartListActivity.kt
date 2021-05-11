@@ -34,8 +34,6 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun successCartItemsList(cartList: ArrayList<CartItem>) {
-
-        // Hide progress dialog.
         hideProgressDialog()
 
         for (product in mProductsList) {
@@ -80,8 +78,8 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
             }
 
             tv_sub_total.text = "R$ $subTotal"
-            // Here we have kept Shipping Charge is fixed as $10 but in your case it may cary. Also, it depends on the location and total amount.
-            tv_shipping_charge.text = "R$ 10.00"
+
+            tv_shipping_charge.text = "R$ 10.00" //TODO alterar para comissão do vendedor
 
             if (subTotal > 0) {
                 ll_checkout.visibility = View.VISIBLE
@@ -104,6 +102,7 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun successProductListFromFireStore(productsList: ArrayList<Product>){
+        //TODO HIDE TALVEZ
         mProductsList = productsList
         getCartItemsList()
 
