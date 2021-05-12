@@ -11,10 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.mobilepoc.myvendor.data.entites.Address
-import com.mobilepoc.myvendor.data.entites.CartItem
-import com.mobilepoc.myvendor.data.entites.Product
-import com.mobilepoc.myvendor.data.entites.User
+import com.mobilepoc.myvendor.data.entites.*
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.view.activities.*
 import com.mobilepoc.myvendor.view.fragments.DashboardFragment
@@ -411,10 +408,16 @@ class FireStoreClass {
                         is CartListActivity -> {
                             activity.successCartItemsList(list)
                         }
+                        is CheckoutActivity ->{
+                            activity.successCartItemsList(list)
+                        }
                     }
                 }.addOnFailureListener { e ->
                     when (activity) {
                         is CartListActivity -> {
+                            activity.hideProgressDialog()
+                        }
+                        is CheckoutActivity -> {
                             activity.hideProgressDialog()
                         }
                     }
@@ -422,7 +425,7 @@ class FireStoreClass {
                 }
     }
 
-    fun getAllProductsList(activity: CartListActivity){
+    fun getAllProductsList(activity: Activity){
         mFireStore.collection(Constants.PRODUCTS)
                 .get()
                 .addOnSuccessListener { document ->
@@ -436,11 +439,26 @@ class FireStoreClass {
 
                         productList.add(product)
                     }
+                    when (activity){
+                        is CartListActivity ->{
+                            activity.successProductListFromFireStore(productList)
+                        }
+                        is CheckoutActivity ->{
+                            activity.successProductFromFireStore((productList))
+                        }
+                    }
 
-                    activity.successProductListFromFireStore(productList)
 
                 }.addOnFailureListener { e ->
-                    activity.hideProgressDialog()
+                    when (activity){
+                        is CartListActivity ->{
+                            activity.hideProgressDialog()
+                        }
+                        is CheckoutActivity ->{
+                            activity.hideProgressDialog()
+                        }
+                    }
+
                     Log.e("Get Product List", "getAllProductsList: Erro enquanto captura todos os produtos", e)
                 }
     }
@@ -562,6 +580,22 @@ class FireStoreClass {
                 }
     }
 
+    fun placeOrder(activity: CheckoutActivity, order: Order){
+        mFireStore.collection(Constants.ORDERS)
+            .document()
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+                activity.orderPlacedSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Erro ao fazer um pedido.",
+                    e
+                )
+            }
+    }
 
 
 

@@ -50,7 +50,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         tv_name.text = "${user.firstName} ${user.lastName}"
         tv_gender.text = user.gender
         tv_email.text = user.email
-        tv_mobile_number.text = "${user.mobile}"
+        tv_checkout_mobile_number.text = "${user.mobile}"
     }
 
     private fun setupActionBar() {

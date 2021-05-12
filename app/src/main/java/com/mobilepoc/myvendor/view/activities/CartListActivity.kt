@@ -14,7 +14,7 @@ import com.mobilepoc.myvendor.utils.Util
 import com.mobilepoc.myvendor.view.adapters.CartItemsListAdapter
 import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_cart_list.*
-
+import java.text.DecimalFormat
 
 
 class CartListActivity : BaseActivity(), View.OnClickListener {
@@ -60,7 +60,7 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
             rv_cart_items_list.layoutManager = LinearLayoutManager(this@CartListActivity)
             rv_cart_items_list.setHasFixedSize(true)
 
-            val cartListAdapter = CartItemsListAdapter(this@CartListActivity, mCartListItem)
+            val cartListAdapter = CartItemsListAdapter(this@CartListActivity, mCartListItem, true)
             rv_cart_items_list.adapter = cartListAdapter
 
             var subTotal: Double = 0.0

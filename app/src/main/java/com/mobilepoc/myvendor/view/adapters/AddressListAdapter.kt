@@ -2,21 +2,17 @@ package com.mobilepoc.myvendor.view.adapters
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.data.entites.Address
 import com.mobilepoc.myvendor.utils.Constants
-import com.mobilepoc.myvendor.utils.Util
 import com.mobilepoc.myvendor.view.activities.AddEditAddressActivity
-import com.mobilepoc.myvendor.view.fragments.BaseFragment
-import com.myshoppal.ui.activities.BaseActivity
+import com.mobilepoc.myvendor.view.activities.CheckoutActivity
 import kotlinx.android.synthetic.main.item_address_layout.view.*
 
 open class AddressListAdapter (
@@ -48,11 +44,9 @@ open class AddressListAdapter (
 
             if (selectAddress){
                 holder.itemView.setOnClickListener{
-                    Toast.makeText(
-                            context,
-                            "Endereço Selecionado: ${model.address}, ${model.zipCode}",
-                            Toast.LENGTH_SHORT
-                    ).show()
+                    val intent = Intent(context, CheckoutActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_SELECTED_ADDRESS, model)
+                    context.startActivity(intent)
                 }
             }
         }

@@ -145,5 +145,13 @@
     <string name="err_your_address_deleted_successfully">Endereço excluído com sucesso</string>
     <string name="title_select_address">Selecione Endereço</string>
 
+    <string name="title_checkout">Finalizar</string>
+    <string name="checkout_lbl_product_items">Itens</string>
+    <string name="checkout_lbl_selected_address">Endereço Selecionado</string>
+    <string name="checkout_lbl_items_receipt">Recibo</string>
+    <string name="lbl_payment_mode">Meio de Pagamento</string>
+    <string name="lbl_cash_on_delivery">Frete</string>
+    <string name="btn_lbl_place_order">Realizar Pedido</string>
+
 
 </resources>

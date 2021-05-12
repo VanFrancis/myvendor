@@ -124,7 +124,7 @@
             tools:text="vfrancis.francis@gmail.com" />
 
         <com.mobilepoc.myvendor.utils.MVTextView
-            android:id="@+id/tv_mobile_number"
+            android:id="@+id/tv_checkout_mobile_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_email"
@@ -138,7 +138,7 @@
             android:id="@+id/ll_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_mobile_number"
+            android:layout_below="@id/tv_checkout_mobile_number"
             android:layout_margin="@dimen/settings_address_margin"
             android:background="@color/mercury"
             android:foreground="?attr/selectableItemBackground"
