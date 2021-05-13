@@ -12,7 +12,7 @@ class MVButton(context: Context, attrs: AttributeSet): AppCompatButton(context,a
     private fun applyFont() {
         //This is used to get the file from the assets folder and set to the title TextView.
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets,"fonts/Oswald-Bold.ttf")
+            Typeface.createFromAsset(context.assets,"fonts/Roboto-Bold.ttf")
         setTypeface(typeface)
     }
 }

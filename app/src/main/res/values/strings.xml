@@ -103,13 +103,13 @@
     <string name="success_message_item_added_to_cart">Produto adicionado com sucesso!</string>
     <string name="btn_lbl_go_to_cart">Ir ao Carrinho</string>
 
-    <string name="title_my_cart">Meu Pedido</string>
+    <string name="title_my_cart">Pedido</string>
     <string name="no_cart_item_found">Nenhum item encontrado no carrinho!</string>
     <string name="lbl_subtotal">Subtotal</string>
     <string name="lbl_shipping_charge">Frete</string>
     <string name="lbl_total_amount">Valor Total</string>
     <string name="btn_lbl_checkout">Fechar Pedido</string>
-    <string name="action_cart">Meu Carrinho</string>
+    <string name="action_cart">Carrinho</string>
     <string name="lbl_out_of_stock">Fora de Estoque</string>
     <string name="mgs_item_removed_successfully">Item removido com sucesso!</string>
     <string name="msg_for_available_stock">O estoque disponível é %1$s! Você não pode adicionar mais do que a quantidade em estoque.</string>
@@ -149,9 +149,22 @@
     <string name="checkout_lbl_product_items">Itens</string>
     <string name="checkout_lbl_selected_address">Endereço Selecionado</string>
     <string name="checkout_lbl_items_receipt">Recibo</string>
-    <string name="lbl_payment_mode">Meio de Pagamento</string>
+    <string name="lbl_payment_mode">Pagamento</string>
     <string name="lbl_cash_on_delivery">Frete</string>
     <string name="btn_lbl_place_order">Realizar Pedido</string>
+    <string name="no_orders_placed_yet">Nenhum pedido foi feito ainda</string>
+
+    //Order
+    <string name="title_my_order_details">Detalhe do Pedido</string>
+    <string name="order_details_lbl">Pedido Detalhe</string>
+    <string name="order_details_lbl_order_id">ID</string>
+    <string name="order_details_lbl_order_date">Data</string>
+    <string name="order_details_lbl_order_status">Status</string>
+    <string name="order_status_pending">Pendente</string>
+    <string name="order_details_lbl_shipping_address">Endereço de Entrega</string>
+
+    <string name="order_status_in_process">Processando</string>
+    <string name="order_status_delivered">Entregue</string>
 
 
 </resources>

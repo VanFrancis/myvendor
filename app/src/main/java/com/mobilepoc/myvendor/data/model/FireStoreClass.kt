@@ -15,6 +15,7 @@ import com.mobilepoc.myvendor.data.entites.*
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.view.activities.*
 import com.mobilepoc.myvendor.view.fragments.DashboardFragment
+import com.mobilepoc.myvendor.view.fragments.OrdersFragment
 import com.mobilepoc.myvendor.view.fragments.ProductsFragment
 
 
@@ -594,6 +595,58 @@ class FireStoreClass {
                     "Erro ao fazer um pedido.",
                     e
                 )
+            }
+    }
+    fun updateAllDetails(activity: CheckoutActivity, cartList: ArrayList<CartItem>) {
+
+        val writeBatch = mFireStore.batch()
+
+        for (cart in cartList) {
+            val productHashMap = HashMap<String, Any>()
+            productHashMap[Constants.STOCK_QUANTITY] =
+                (cart.stock_quantity.toInt() - cart.cart_quantity.toInt()).toString()
+
+            val documentReference = mFireStore.collection(Constants.PRODUCTS)
+                .document(cart.product_id)
+
+            writeBatch.update(documentReference, productHashMap)
+        }
+
+        for (cart in cartList) {
+            val documentReference = mFireStore.collection(Constants.CART_ITEMS)
+                .document(cart.id)
+            writeBatch.delete(documentReference)
+        }
+
+        writeBatch.commit().addOnSuccessListener {
+            activity.allDetailsUpdatedSuccessfully()
+
+        }.addOnFailureListener { e ->
+            activity.hideProgressDialog()
+
+            Log.e(activity.javaClass.simpleName, "Erro ao atualizar todos os detalhes após o pedido feito.", e)
+        }
+    }
+    fun getMyOrdersList(fragment: OrdersFragment) {
+        mFireStore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID, getUserIDAtual())
+            .get()
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+                val list: ArrayList<Order> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+
+                    list.add(orderItem)
+                }
+                fragment.populateOrdersListInUI(list)
+            }
+            .addOnFailureListener { e ->
+                fragment.hideProgressDialog()
+                Log.e(fragment.javaClass.simpleName, "Erro ao obter a lista de pedidos.", e)
             }
     }
 

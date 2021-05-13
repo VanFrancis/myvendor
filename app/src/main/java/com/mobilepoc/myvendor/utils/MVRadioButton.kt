@@ -12,7 +12,7 @@ class MVRadioButton(context: Context, attr: AttributeSet): AppCompatRadioButton(
     }
     fun applyFont(){
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets,"fonts/Oswald-Bold.ttf")
+            Typeface.createFromAsset(context.assets,"fonts/Roboto-Bold.ttf")
         setTypeface(typeface)
     }
 

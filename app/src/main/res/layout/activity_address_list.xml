@@ -33,7 +33,7 @@
         android:id="@+id/tv_add_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/btn_add_address_margin"
+        android:layout_margin="@dimen/btn_add_client_margin"
         android:background="@drawable/item_primary_color_border_background"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"

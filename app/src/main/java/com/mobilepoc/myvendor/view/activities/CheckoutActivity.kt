@@ -114,11 +114,12 @@ class CheckoutActivity : BaseActivity() {
                 FireStoreClass().getUserIDAtual(),
                 mCartItemsList,
                 mAddressDetails!!,
-                "Meu pedido ${System.currentTimeMillis()}",
+                "Nº Pedido ${System.currentTimeMillis()}",
                 mCartItemsList[0].image,
                 mSubTotal.toString(),
                 "10.00",
                 mTotalAmount.toString(),
+                System.currentTimeMillis()
             )
             FireStoreClass().placeOrder(this@CheckoutActivity, order)
         }
@@ -126,10 +127,15 @@ class CheckoutActivity : BaseActivity() {
 
     }
     fun orderPlacedSuccess(){
-        hideProgressDialog()
-        Util.exibirToast(baseContext, "Seu pedido foi realizado com sucesso!")
+        FireStoreClass().updateAllDetails(this@CheckoutActivity, mCartItemsList)
+    }
 
-        val intent = Intent(this, DashboardActivity::class.java)
+    fun allDetailsUpdatedSuccessfully(){
+        hideProgressDialog()
+
+        Util.exibirToast(baseContext,"Seu pedido foi feito com sucesso")
+
+        val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

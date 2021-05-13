@@ -125,7 +125,7 @@
     <dimen name="ib_add_cart_item_marginEnd">16dp</dimen>
 
     //Address
-    <dimen name="btn_add_address_margin">16dp</dimen>
+    <dimen name="btn_add_client_margin">16dp</dimen>
     <dimen name="btn_add_address_padding">16dp</dimen>
     <dimen name="add_address_textSize">18sp</dimen>
     <dimen name="rv_address_list_marginTop">16dp</dimen>
@@ -150,6 +150,20 @@
     <dimen name="checkout_content_paddingTopBottom">10dp</dimen>
     <dimen name="ll_checkout_place_order_padding">16dp</dimen>
     <dimen name="ll_checkout_items_receipt">16dp</dimen>
+
+    //Order
+    <dimen name="my_order_details_content_marginStartEnd">16dp</dimen>
+    <dimen name="my_order_details_content_marginTopBottom">10dp</dimen>
+    <dimen name="my_order_details_content_lbl_padding">2dp</dimen>
+    <dimen name="my_order_details_lbl_textSize">14sp</dimen>
+    <dimen name="my_order_details_status_paddingStartEnd">10dp</dimen>
+    <dimen name="my_order_details_status_paddingTopBottom">2dp</dimen>
+    <dimen name="lbl_order_details_textSize">16sp</dimen>
+    <dimen name="my_order_details_content_paddingStartEnd">16dp</dimen>
+    <dimen name="my_order_details_content_paddingTopBottom">10dp</dimen>
+    <dimen name="my_order_details_items_receipt">16dp</dimen>
+    <dimen name="my_order_details_label_value_textSize">18sp</dimen>
+
 
 
 

@@ -12,33 +12,32 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyVendor">
-        <activity android:name=".view.activities.CheckoutActivity"
+        <activity android:name=".view.activities.OrderDetailsActivity"
                   android:theme="@style/Theme.MyVendor.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.activities.CheckoutActivity"
+            android:theme="@style/Theme.MyVendor.NoActionBar">
         </activity>
         <activity
             android:name=".view.activities.AddEditAddressActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
-
         </activity>
         <activity
             android:name=".view.activities.AddressListActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
-
         </activity>
         <activity
             android:name=".view.activities.CartListActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
-
         </activity>
         <activity
             android:name=".view.activities.ProductDetailsActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
-
         </activity>
         <activity
             android:name=".view.activities.UserProfileActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
-
         </activity>
         <activity
             android:name=".view.activities.SettingsActivity"

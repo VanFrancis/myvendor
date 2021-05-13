@@ -14,7 +14,7 @@ class MVTextView(context: Context, attrs: AttributeSet): AppCompatTextView(conte
     private fun applyFont() {
         //This is used to get the file from the assets folder and set to the title TextView.
         val typeface: Typeface =
-            Typeface.createFromAsset(context.assets,"fonts/Oswald-Regular.ttf")
+            Typeface.createFromAsset(context.assets,"fonts/Roboto-Regular.ttf")
         setTypeface(typeface)
     }
 }
