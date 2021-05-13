@@ -9,23 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepoc.myvendor.R
-import com.mobilepoc.myvendor.data.entites.Address
+import com.mobilepoc.myvendor.data.entites.Client
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.view.activities.AddEditAddressActivity
 import com.mobilepoc.myvendor.view.activities.CheckoutActivity
 import kotlinx.android.synthetic.main.item_address_layout.view.*
 
 open class AddressListAdapter (
-        private val context: Context,
-        private var list: ArrayList<Address>,
-        private val selectAddress: Boolean
+    private val context: Context,
+    private var list: ArrayList<Client>,
+    private val selectAddress: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return MyViewHolder(
                 LayoutInflater.from(context).inflate(
-                        R.layout.item_address_layout,
+                        R.layout.item_client_layout,
                         parent,
                         false
                 )

@@ -5,7 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.databinding.ActivityAddEditAddressBinding
-import com.mobilepoc.myvendor.data.entites.Address
+import com.mobilepoc.myvendor.data.entites.Client
 import com.mobilepoc.myvendor.data.model.FireStoreClass
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.Util
@@ -13,7 +13,7 @@ import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_add_edit_address.*
 
 class AddEditAddressActivity : BaseActivity() {
-    private var mAddressDetails: Address? = null
+    private var mClientDetails: Client? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,23 +21,23 @@ class AddEditAddressActivity : BaseActivity() {
         setContentView(binding.root)
 
         if (intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)){
-            mAddressDetails = intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)!!
+            mClientDetails = intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)!!
         }
         setupActionBar()
 
-        if (mAddressDetails != null) {
-            if (mAddressDetails!!.id.isNotEmpty()) {
+        if (mClientDetails != null) {
+            if (mClientDetails!!.id.isNotEmpty()) {
 
-                tv_title.text = resources.getString(R.string.title_edit_address)
+                tv_title.text = resources.getString(R.string.title_edit_client)
                 btn_submit_address.text = resources.getString(R.string.btn_lbl_update)
 
-                et_full_name.setText(mAddressDetails?.name)
-                et_phone_number.setText(mAddressDetails?.mobileNumber)
-                et_address.setText(mAddressDetails?.address)
-                et_zip_code.setText(mAddressDetails?.zipCode)
-                et_additional_note.setText(mAddressDetails?.additionalNote)
+                et_full_name.setText(mClientDetails?.name)
+                et_phone_number.setText(mClientDetails?.mobileNumber)
+                et_address.setText(mClientDetails?.address)
+                et_zip_code.setText(mClientDetails?.zipCode)
+                et_additional_note.setText(mClientDetails?.additionalNote)
 
-                when (mAddressDetails?.type) {
+                when (mClientDetails?.type) {
                     Constants.HOME -> {
                         rb_home.isChecked = true
                     }
@@ -47,7 +47,7 @@ class AddEditAddressActivity : BaseActivity() {
                     else -> {
                         rb_other.isChecked = true
                         til_other_details.visibility = View.VISIBLE
-                        et_other_details.setText(mAddressDetails?.otherDetails)
+                        et_other_details.setText(mClientDetails?.otherDetails)
                     }
                 }
             }
@@ -97,7 +97,7 @@ class AddEditAddressActivity : BaseActivity() {
                 }
             }
 
-            val addressModel = Address(
+            val addressModel = Client(
                 FireStoreClass().getUserIDAtual(),
                 fullName,
                 phoneNumber,
@@ -107,11 +107,11 @@ class AddEditAddressActivity : BaseActivity() {
                 addressType,
                 otherDetails
             )
-            if(mAddressDetails != null && mAddressDetails!!.id.isNotEmpty()){
+            if(mClientDetails != null && mClientDetails!!.id.isNotEmpty()){
                 FireStoreClass().updateAddress(
                         this@AddEditAddressActivity,
                         addressModel,
-                        mAddressDetails!!.id
+                        mClientDetails!!.id
                 )
             }else{
                 FireStoreClass().addAddress(this@AddEditAddressActivity, addressModel)
@@ -162,10 +162,10 @@ class AddEditAddressActivity : BaseActivity() {
     fun addUpdateAddressSuccess() {
         hideProgressDialog()
 
-        val notifySuccessMessage: String = if (mAddressDetails != null && mAddressDetails!!.id.isNotEmpty()) {
-            resources.getString(R.string.msg_your_address_updated_successfully)
+        val notifySuccessMessage: String = if (mClientDetails != null && mClientDetails!!.id.isNotEmpty()) {
+            resources.getString(R.string.msg_your_client_updated_successfully)
         } else {
-            resources.getString(R.string.err_your_address_added_successfully)
+            resources.getString(R.string.err_your_client_added_successfully)
         }
         Util.exibirToast(baseContext,notifySuccessMessage)
         setResult(RESULT_OK)
