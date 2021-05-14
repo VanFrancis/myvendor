@@ -63,7 +63,7 @@
     <string name="action_settings">Configuração</string>
     <string name="title_settings">Configuração</string>
     <string name="lbl_edit">Editar</string>
-    <string name="lbl_addresses">Endereço</string>
+    <string name="lbl_list_client">Lista de Clientes</string>
     <string name="btn_lbl_logout">Sair</string>
     <string name="title_edit_profile">Editar Perfil</string>
     <string name="action_add_product">Novo Produto</string>
@@ -115,12 +115,12 @@
     <string name="msg_for_available_stock">O estoque disponível é %1$s! Você não pode adicionar mais do que a quantidade em estoque.</string>
     <string name="action_search">Pesquisar</string>
 
-    //Address
-    <string name="title_address_list">Lista de Endereços</string>
-    <string name="no_address_found">Nenhum endereço foi encontrado</string>
-    <string name="lbL_add_address">Novo Endereço</string>
+    //Client
+    <string name="title_client_list">Lista de Clientes</string>
+    <string name="no_address_found">Nenhum cliente foi encontrado</string>
+    <string name="lbL_add_address">Novo Cliente</string>
 
-    <string name="title_add_address">Novo Endereço</string>
+    <string name="title_add_client">Novo Cliente</string>
     <string name="hint_full_name">Nome Completo</string>
     <string name="hint_phone_number">Telefone</string>
     <string name="hint_address">Endereço</string>
@@ -136,21 +136,21 @@
     <string name="err_msg_please_enter_address">Por favor, preencha o endereço.</string>
     <string name="err_msg_please_enter_zip_code">Por favor, preencha o CEP.</string>
     <string name="err_msg_please_enter_other_details">Por favor, preencha outros detalhes.</string>
-    <string name="err_your_address_added_successfully">Endereço adicionado com sucesso!</string>
+    <string name="err_your_client_added_successfully">Cliente adicionado com sucesso!</string>
 
-    <string name="title_edit_address">Editar Endereço</string>
+    <string name="title_edit_client">Editar Cliente</string>
     <string name="btn_lbl_update">Atualizar</string>
-    <string name="msg_your_address_updated_successfully">Endereço foi atualizado com sucesso</string>
+    <string name="msg_your_client_updated_successfully">Cliente foi atualizado com sucesso</string>
 
-    <string name="err_your_address_deleted_successfully">Endereço excluído com sucesso</string>
-    <string name="title_select_address">Selecione Endereço</string>
+    <string name="err_your_client_deleted_successfully">Cliente excluído com sucesso</string>
+    <string name="title_select_client">Selecione um Cliente</string>
 
     <string name="title_checkout">Finalizar</string>
     <string name="checkout_lbl_product_items">Itens</string>
-    <string name="checkout_lbl_selected_address">Endereço Selecionado</string>
+    <string name="checkout_lbl_selected_client">Cliente Selecionado</string>
     <string name="checkout_lbl_items_receipt">Recibo</string>
-    <string name="lbl_payment_mode">Pagamento</string>
-    <string name="lbl_cash_on_delivery">Frete</string>
+    <string name="lbl_payment_mode">Modo Pagamento</string>
+    <string name="lbl_cash_on_delivery">Boleto 15 dias</string>
     <string name="btn_lbl_place_order">Realizar Pedido</string>
     <string name="no_orders_placed_yet">Nenhum pedido foi feito ainda</string>
 

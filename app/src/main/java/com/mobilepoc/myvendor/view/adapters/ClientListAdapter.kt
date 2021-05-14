@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobilepoc.myvendor.R
 import com.mobilepoc.myvendor.data.entites.Client
 import com.mobilepoc.myvendor.utils.Constants
-import com.mobilepoc.myvendor.view.activities.AddEditAddressActivity
+import com.mobilepoc.myvendor.view.activities.AddEditClientActivity
 import com.mobilepoc.myvendor.view.activities.CheckoutActivity
-import kotlinx.android.synthetic.main.item_address_layout.view.*
+import kotlinx.android.synthetic.main.item_client_layout.view.*
 
-open class AddressListAdapter (
+
+open class ClientListAdapter (
     private val context: Context,
     private var list: ArrayList<Client>,
     private val selectAddress: Boolean
@@ -38,14 +39,13 @@ open class AddressListAdapter (
 
         if (holder is MyViewHolder) {
             holder.itemView.tv_address_full_name.text = model.name
-            holder.itemView.tv_address_type.text = model.type
             holder.itemView.tv_address_details.text = "${model.address}, ${model.zipCode}"
             holder.itemView.tv_address_mobile_number.text = model.mobileNumber
 
             if (selectAddress){
                 holder.itemView.setOnClickListener{
                     val intent = Intent(context, CheckoutActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_SELECTED_ADDRESS, model)
+                    intent.putExtra(Constants.EXTRA_SELECTED_CLIENT, model)
                     context.startActivity(intent)
                 }
             }
@@ -57,9 +57,9 @@ open class AddressListAdapter (
     }
 
     fun notifyEditItem(activity: Activity, position: Int){
-        val intent = Intent(context, AddEditAddressActivity::class.java)
-        intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS,list[position])
-        activity.startActivityForResult(intent,Constants.ADD_ADDRESS_REQUEST_CODE)
+        val intent = Intent(context, AddEditClientActivity::class.java)
+        intent.putExtra(Constants.EXTRA_CLIENT_DETAILS,list[position])
+        activity.startActivityForResult(intent,Constants.ADD_CLIENT_REQUEST_CODE)
         notifyItemChanged(position)
     }
 

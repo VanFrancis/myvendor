@@ -7,10 +7,13 @@ import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.StorageTask
 import com.mobilepoc.myvendor.data.entites.*
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.view.activities.*
@@ -238,6 +241,8 @@ class FireStoreClass {
     fun getProductsList(fragment: Fragment) {
         mFireStore.collection(Constants.PRODUCTS)
                 .whereEqualTo(Constants.USER_ID, getUserIDAtual())
+                .orderBy("title")
+                .limit(500)
                 .get() // Obterá os snapshots dos documentos.
                 .addOnSuccessListener { document ->
 
@@ -273,8 +278,11 @@ class FireStoreClass {
     /**
      * Uma função para obter a lista de itens do painel. A lista será uma lista geral de itens, não baseada na id do usuário
      */
+
     fun getDashboardItemsList(fragment: DashboardFragment) {
         mFireStore.collection(Constants.PRODUCTS)
+                .orderBy("title")
+                .limit(500)
                 .get()
                 .addOnSuccessListener { document ->
 
@@ -304,6 +312,39 @@ class FireStoreClass {
                     )
                 }
     }
+  /*  fun getMoreItemsList (fragment: DashboardFragment){ //9
+        nextQuery!!.get()
+            .addOnSuccessListener { document ->
+
+                fragment.hideProgressDialog()
+
+                if(document.size() > 0 ){
+                    val lastDocument = document.documents[document.size() -1]
+                    nextQuery= mFireStore!!.collection(Constants.PRODUCTS)
+                        .orderBy("title")
+                        .startAfter(lastDocument)
+                        .limit(10)
+
+                    for (i in document.documents) {
+                        val product = i.toObject(Product::class.java)!!
+                        product.product_id = i.id
+                        productsListDash.add(product)
+                    }
+                    // Passe o resultado do sucesso para base fragment.
+                    fragment.successDashboardItemsList(productsListDash)
+                }
+            }.addOnFailureListener { e ->
+                fragment.hideProgressDialog()
+                Log.e(
+                    fragment.javaClass.simpleName,
+                    "Erro ao obter a lista de MAIS itens do painel.",
+                    e
+                )
+            }
+    }*/
+
+
+
     /**
      * Uma função para excluir o produto  - Firestore
      */
@@ -507,52 +548,52 @@ class FireStoreClass {
                 }
 
     }
-    fun addAddress(activity: AddEditAddressActivity, addressInfo: Address) {
-        mFireStore.collection(Constants.ADDRESSES)
+    fun addClient(activity: AddEditClientActivity, clientInfo: Client) {
+        mFireStore.collection(Constants.CLIENT)
                 .document()
-                .set(addressInfo, SetOptions.merge())
+                .set(clientInfo, SetOptions.merge())
                 .addOnSuccessListener {
-                    activity.addUpdateAddressSuccess()
+                    activity.addUpdateClientSuccess()
                 }
                 .addOnFailureListener { e ->
                     activity.hideProgressDialog()
                     Log.e(
                             activity.javaClass.simpleName,
-                            "Erro enquanto adiciona um endereço",
+                            "Erro enquanto adiciona um cliente",
                             e
                     )
                 }
     }
-    fun getAddressesList(activity: AddressListActivity) {
-        // The collection name for PRODUCTS
-        mFireStore.collection(Constants.ADDRESSES)
-                .whereEqualTo(Constants.USER_ID, getUserIDAtual())
+    fun getClientList(activity: ClientListActivity) {
+        mFireStore.collection(Constants.CLIENT)
+                //.whereEqualTo(Constants.USER_ID, getUserIDAtual())
+                .orderBy("name")
                 .get()
                 .addOnSuccessListener { document ->
                     Log.e(activity.javaClass.simpleName, document.documents.toString())
-                    val addressList: ArrayList<Address> = ArrayList()
+                    val clientList: ArrayList<Client> = ArrayList()
                     for (i in document.documents) {
-                        val address = i.toObject(Address::class.java)!!
+                        val address = i.toObject(Client::class.java)!!
                         address.id = i.id
 
-                        addressList.add(address)
+                        clientList.add(address)
                     }
-                    activity.successAddressListFromFirestore(addressList)
+                    activity.successClientListFromFirestore(clientList)
                 }
                 .addOnFailureListener { e ->
                     activity.hideProgressDialog()
-                    Log.e(activity.javaClass.simpleName, "Erro enquanto carrega os endereços", e)
+                    Log.e(activity.javaClass.simpleName, "Erro enquanto carrega os clientes", e)
                 }
 
     }
-    fun updateAddress(activity: AddEditAddressActivity, addressInfo: Address, addressId: String) {
+    fun updateAddress(activity: AddEditClientActivity, clientInfo: Client, addressId: String) {
 
-        mFireStore.collection(Constants.ADDRESSES)
+        mFireStore.collection(Constants.CLIENT)
                 .document(addressId)
-                .set(addressInfo, SetOptions.merge())
+                .set(clientInfo, SetOptions.merge())
                 .addOnSuccessListener {
 
-                    activity.addUpdateAddressSuccess()
+                    activity.addUpdateClientSuccess()
                 }
                 .addOnFailureListener { e ->
                     activity.hideProgressDialog()
@@ -563,19 +604,19 @@ class FireStoreClass {
                     )
                 }
     }
-    fun deleteAddress(activity: AddressListActivity, addressId: String) {
+    fun deleteClient(activity: ClientListActivity, clientId: String) {
 
-        mFireStore.collection(Constants.ADDRESSES)
-                .document(addressId)
+        mFireStore.collection(Constants.CLIENT)
+                .document(clientId)
                 .delete()
                 .addOnSuccessListener {
-                    activity.deleteAddressSuccess()
+                    activity.deleteClientSuccess()
                 }
                 .addOnFailureListener { e ->
                     activity.hideProgressDialog()
                     Log.e(
                             activity.javaClass.simpleName,
-                            "Erro ao excluir um endereço.",
+                            "Erro ao excluir um cliente.",
                             e
                     )
                 }

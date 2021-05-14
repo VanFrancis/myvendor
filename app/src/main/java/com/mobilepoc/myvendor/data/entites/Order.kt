@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Order(
         val user_id: String = "",
         val items: ArrayList<CartItem> = ArrayList(),
-        val address: Address = Address(),
+        val client: Client = Client(),
         val title: String = "",
         val image: String = "",
         val sub_total_amount: String = "",

@@ -26,19 +26,6 @@
             android:textSize="@dimen/item_address_name_textSize"
             tools:text="Maria do Carmo" />
 
-        <com.mobilepoc.myvendor.utils.MVTextView
-            android:id="@+id/tv_address_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/app_gradiente"
-            android:paddingStart="@dimen/item_address_type_paddingStartEnd"
-            android:paddingTop="@dimen/item_address_type_paddingTopBottom"
-            android:paddingEnd="@dimen/item_address_type_paddingStartEnd"
-            android:paddingBottom="@dimen/item_address_type_paddingTopBottom"
-            android:textColor="@color/white"
-            android:textSize="@dimen/address_details_textSize"
-            android:textStyle="bold"
-            tools:text="Home" />
     </LinearLayout>
 
     <com.mobilepoc.myvendor.utils.MVTextView

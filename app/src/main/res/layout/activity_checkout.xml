@@ -71,7 +71,7 @@
                 android:layout_marginBottom="@dimen/checkout_content_marginTopBottom"
                 android:paddingTop="@dimen/checkout_content_lbl_padding"
                 android:paddingBottom="@dimen/checkout_content_lbl_padding"
-                android:text="@string/checkout_lbl_selected_address"
+                android:text="@string/checkout_lbl_selected_client"
                 android:textColor="@color/astronaut"
                 android:textSize="@dimen/checkout_lbl_textSize" />
 

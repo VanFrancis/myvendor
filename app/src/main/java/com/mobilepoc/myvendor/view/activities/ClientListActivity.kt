@@ -9,51 +9,51 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepoc.myvendor.R
-import com.mobilepoc.myvendor.data.entites.Address
+import com.mobilepoc.myvendor.data.entites.Client
 import com.mobilepoc.myvendor.data.model.FireStoreClass
-import com.mobilepoc.myvendor.databinding.ActivityAddressListBinding
+import com.mobilepoc.myvendor.databinding.ActivityClientListBinding
 import com.mobilepoc.myvendor.utils.Constants
 import com.mobilepoc.myvendor.utils.Util
-import com.mobilepoc.myvendor.view.adapters.AddressListAdapter
+import com.mobilepoc.myvendor.view.adapters.ClientListAdapter
 import com.myshoppal.ui.activities.BaseActivity
 import com.myshoppal.utils.SwipeToDeleteCallback
 import com.myshoppal.utils.SwipeToEditCallback
-import kotlinx.android.synthetic.main.activity_address_list.*
+import kotlinx.android.synthetic.main.activity_client_list.*
 
 
-class AddressListActivity : BaseActivity() {
-    private var mSelectAddress: Boolean = false
+class ClientListActivity : BaseActivity() {
+    private var mSelectClient: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityAddressListBinding.inflate(layoutInflater)
+        val binding = ActivityClientListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (intent.hasExtra(Constants.EXTRA_SELECT_ADDRESS)){
-            mSelectAddress = intent.getBooleanExtra(Constants.EXTRA_SELECT_ADDRESS,false)
+        if (intent.hasExtra(Constants.EXTRA_SELECT_CLIENT)){
+            mSelectClient = intent.getBooleanExtra(Constants.EXTRA_SELECT_CLIENT,false)
         }
 
         setupActionBar()
 
-        if(mSelectAddress){
-            tv_title_address_list.text = resources.getString(R.string.title_select_address)
+        if(mSelectClient){
+            tv_title_client_list.text = resources.getString(R.string.title_select_client)
         }
 
-        binding.tvAddAddress.setOnClickListener{
-            val intent = Intent(this,AddEditAddressActivity::class.java)
-            startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
+        binding.tvAddClient.setOnClickListener{
+            val intent = Intent(this,AddEditClientActivity::class.java)
+            startActivityForResult(intent, Constants.ADD_CLIENT_REQUEST_CODE)
 
         }
-        getAddressesList()
+        getClientList()
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == Constants.ADD_ADDRESS_REQUEST_CODE) {
+            if (requestCode == Constants.ADD_CLIENT_REQUEST_CODE) {
 
-                getAddressesList()
+                getClientList()
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             // Um registro é impresso quando o usuário fecha ou cancela
@@ -62,69 +62,69 @@ class AddressListActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(toolbar_address_list_activity)
+        setSupportActionBar(toolbar_client_list_activity)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_vector_arrow_left)
         }
-        toolbar_address_list_activity.setNavigationOnClickListener { onBackPressed() }
+        toolbar_client_list_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-    fun successAddressListFromFirestore(addressList: ArrayList<Address>){
+    fun successClientListFromFirestore(clientList: ArrayList<Client>){
         hideProgressDialog()
-        if(addressList.size > 0){
-            rv_address_list.visibility = View.VISIBLE
-            tv_no_address_found.visibility = View.GONE
+        if(clientList.size > 0){
+            rv_client_list.visibility = View.VISIBLE
+            tv_no_client_found.visibility = View.GONE
 
-            rv_address_list.layoutManager = LinearLayoutManager(this)
-            rv_address_list.setHasFixedSize(true)
+            rv_client_list.layoutManager = LinearLayoutManager(this)
+            rv_client_list.setHasFixedSize(true)
 
-            val addressAdapter = AddressListAdapter(this, addressList, mSelectAddress)
-            rv_address_list.adapter = addressAdapter
+            val clientAdapter = ClientListAdapter(this, clientList, mSelectClient)
+            rv_client_list.adapter = clientAdapter
 
-            if (!mSelectAddress){
+            if (!mSelectClient){
                 val editSwipeHandler = object : SwipeToEditCallback(this) {
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        val adapter = rv_address_list.adapter as AddressListAdapter
+                        val adapter = rv_client_list.adapter as ClientListAdapter
                         adapter.notifyEditItem(
-                                this@AddressListActivity,
+                                this@ClientListActivity,
                                 viewHolder.bindingAdapterPosition
                         )
                     }
                 }
                 val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
-                editItemTouchHelper.attachToRecyclerView(rv_address_list)
+                editItemTouchHelper.attachToRecyclerView(rv_client_list)
 
                 val deleteSwipeHandler = object: SwipeToDeleteCallback(this){
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         showProgressDialog()
-                        FireStoreClass().deleteAddress(
-                                this@AddressListActivity,
-                                addressList[viewHolder.absoluteAdapterPosition].id
+                        FireStoreClass().deleteClient(
+                                this@ClientListActivity,
+                                clientList[viewHolder.absoluteAdapterPosition].id
                         )
                     }
 
                 }
                 val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
-                deleteItemTouchHelper.attachToRecyclerView(rv_address_list)
+                deleteItemTouchHelper.attachToRecyclerView(rv_client_list)
             }
 
         }else{
-            rv_address_list.visibility = View.GONE
-            tv_no_address_found.visibility = View.VISIBLE
+            rv_client_list.visibility = View.GONE
+            tv_no_client_found.visibility = View.VISIBLE
         }
     }
-    private  fun getAddressesList(){
+    private  fun getClientList(){
         showProgressDialog()
-        FireStoreClass().getAddressesList(this)
+        FireStoreClass().getClientList(this)
     }
 
-    fun deleteAddressSuccess(){
+    fun deleteClientSuccess(){
         hideProgressDialog()
-        Util.exibirToast(baseContext, resources.getString(R.string.err_your_address_deleted_successfully))
-        getAddressesList()
+        Util.exibirToast(baseContext, resources.getString(R.string.err_your_client_deleted_successfully))
+        getClientList()
     }
 
 

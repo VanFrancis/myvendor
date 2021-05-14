@@ -81,7 +81,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     finish()
                 }
                 R.id.ll_address ->{
-                    val intent = Intent(this,AddressListActivity::class.java)
+                    val intent = Intent(this,ClientListActivity::class.java)
                     startActivity(intent)
                 }
             }

@@ -43,12 +43,12 @@ object Constants {
     const val OFFICE: String = "Trabalho"
     const val OTHER: String = "Outro"
 
-    const val ADDRESSES: String = "addresses"
+    const val CLIENT: String = "clients"
 
-    const val EXTRA_ADDRESS_DETAILS: String = "AddressDetails"
-    const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
-    const val ADD_ADDRESS_REQUEST_CODE: Int = 121
-    const val  EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
+    const val EXTRA_CLIENT_DETAILS: String = "ClientDetails"
+    const val EXTRA_SELECT_CLIENT: String = "extra_select_address"
+    const val ADD_CLIENT_REQUEST_CODE: Int = 121
+    const val  EXTRA_SELECTED_CLIENT: String = "extra_selected_client"
     const val EXTRA_ORDER_DETAILS: String = "extra_ORDER_DETAILS"
 
     const val ORDERS: String = "orders"

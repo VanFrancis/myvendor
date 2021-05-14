@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.mobilepoc.myvendor.R
-import com.mobilepoc.myvendor.data.entites.Address
+import com.mobilepoc.myvendor.data.entites.Client
 import com.mobilepoc.myvendor.data.entites.CartItem
 import com.mobilepoc.myvendor.data.entites.Product
 import com.mobilepoc.myvendor.data.model.FireStoreClass
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_checkout.*
 
 
 class CheckoutActivity : BaseActivity() {
-    private var mAddressDetails : Address? = null
+    private var mClientDetails : Client? = null
     private lateinit var mProductList: ArrayList<Product>
     private lateinit var mCartItemsList: ArrayList<CartItem>
     private var mSubTotal = 0.00
@@ -31,20 +31,16 @@ class CheckoutActivity : BaseActivity() {
         setupActionBar()
 
 
-        if(intent.hasExtra(Constants.EXTRA_SELECTED_ADDRESS)){
-            mAddressDetails = intent.getParcelableExtra<Address>(Constants.EXTRA_SELECTED_ADDRESS)
+        if(intent.hasExtra(Constants.EXTRA_SELECTED_CLIENT)){
+            mClientDetails = intent.getParcelableExtra<Client>(Constants.EXTRA_SELECTED_CLIENT)
         }
 
-        if (mAddressDetails != null){
-            tv_checkout_address_type.text = mAddressDetails?.type
-            tv_checkout_full_name.text = mAddressDetails?.name
-            tv_checkout_address.text = "${mAddressDetails!!.address}, ${mAddressDetails!!.zipCode}"
-            tv_checkout_additional_note.text = mAddressDetails?.additionalNote
+        if (mClientDetails != null){
+            tv_checkout_full_name.text = mClientDetails?.name
+            tv_checkout_address.text = "${mClientDetails!!.address}, ${mClientDetails!!.zipCode}"
+            tv_checkout_additional_note.text = mClientDetails?.additionalNote
 
-            if(mAddressDetails?.otherDetails!!.isNotEmpty()){
-                tv_checkout_other_details.text = mAddressDetails?.otherDetails
-            }
-            tv_checkout_mobile_number.text = mAddressDetails?.mobileNumber
+            tv_checkout_mobile_number.text = mClientDetails?.mobileNumber
         }
 
         getProductList()
@@ -109,11 +105,11 @@ class CheckoutActivity : BaseActivity() {
 
     private fun placeAnOrder(){
         showProgressDialog()
-        if (mAddressDetails != null){
+        if (mClientDetails != null){
             val order = Order(
                 FireStoreClass().getUserIDAtual(),
                 mCartItemsList,
-                mAddressDetails!!,
+                mClientDetails!!,
                 "Nº Pedido ${System.currentTimeMillis()}",
                 mCartItemsList[0].image,
                 mSubTotal.toString(),

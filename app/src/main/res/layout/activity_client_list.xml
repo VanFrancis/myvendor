@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.AddressListActivity">
+    tools:context=".view.activities.ClientListActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_address_list_activity"
+        android:id="@+id/toolbar_client_list_activity"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/app_gradiente"
@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_title_address_list"
+            android:id="@+id/tv_title_client_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingStart="@dimen/toolbar_title_padding"
             android:paddingEnd="0dp"
-            android:text="@string/title_address_list"
+            android:text="@string/title_client_list"
             android:textColor="@color/white"
             android:textSize="@dimen/toolbar_title_text_size"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <com.mobilepoc.myvendor.utils.MVTextView
-        android:id="@+id/tv_add_address"
+        android:id="@+id/tv_add_client"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/btn_add_client_margin"
@@ -43,10 +43,10 @@
         android:textSize="@dimen/add_address_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_address_list_activity" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_client_list_activity" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_address_list"
+        android:id="@+id/rv_client_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/rv_address_list_marginTop"
@@ -54,10 +54,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_address" />
+        app:layout_constraintTop_toBottomOf="@id/tv_add_client" />
 
     <com.mobilepoc.myvendor.utils.MVTextView
-        android:id="@+id/tv_no_address_found"
+        android:id="@+id/tv_no_client_found"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -70,6 +70,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_address" />
+        app:layout_constraintTop_toBottomOf="@id/tv_add_client" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

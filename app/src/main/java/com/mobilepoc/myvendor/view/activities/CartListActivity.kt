@@ -14,7 +14,6 @@ import com.mobilepoc.myvendor.utils.Util
 import com.mobilepoc.myvendor.view.adapters.CartItemsListAdapter
 import com.myshoppal.ui.activities.BaseActivity
 import kotlinx.android.synthetic.main.activity_cart_list.*
-import java.text.DecimalFormat
 
 
 class CartListActivity : BaseActivity(), View.OnClickListener {
@@ -143,8 +142,8 @@ class CartListActivity : BaseActivity(), View.OnClickListener {
         if (v != null ){
             when(v.id) {
                 R.id.btn_checkout -> {
-                    val intent = Intent(this, AddressListActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_SELECT_ADDRESS,true)
+                    val intent = Intent(this, ClientListActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_SELECT_CLIENT,true)
                     startActivity(intent)
                 }
             }

@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/settings_lbl_addresses_margin"
                 android:layout_weight="1"
-                android:text="@string/lbl_addresses"
+                android:text="@string/lbl_list_client"
                 android:textColor="@color/mid_gray"
                 android:textSize="@dimen/settings_lbl_addresses_textSize" />
 

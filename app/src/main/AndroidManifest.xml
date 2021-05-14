@@ -20,11 +20,11 @@
             android:theme="@style/Theme.MyVendor.NoActionBar">
         </activity>
         <activity
-            android:name=".view.activities.AddEditAddressActivity"
+            android:name=".view.activities.AddEditClientActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
         </activity>
         <activity
-            android:name=".view.activities.AddressListActivity"
+            android:name=".view.activities.ClientListActivity"
             android:theme="@style/Theme.MyVendor.NoActionBar">
         </activity>
         <activity
